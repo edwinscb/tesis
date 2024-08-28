@@ -1,4 +1,5 @@
 import cv2
+from ultralytics import YOLO
 
 def mostrar_stream(url, nombre_ventana="Camara"):
     # Crear una instancia de VideoCapture con la URL proporcionada
@@ -25,6 +26,7 @@ def mostrar_stream(url, nombre_ventana="Camara"):
     # Liberar recursos y cerrar ventanas
     cap.release()
     cv2.destroyAllWindows()
+
 
 # Llamada al método con la URL del stream y el nombre de la ventana
 mostrar_stream("http://192.168.1.12:8080/video", "Camara Edwin")

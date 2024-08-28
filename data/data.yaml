@@ -1,0 +1,6 @@
+train: C:\Users\edwin\OneDrive\Documentos\Clases\Tesis\tesis\data\train\images
+val: C:\Users\edwin\OneDrive\Documentos\Clases\Tesis\tesis\data\valid\images
+test:
+
+nc: 6
+names: ["Basket", "Football", "Golf", "Rugby", "Tennis", "Volley"]
