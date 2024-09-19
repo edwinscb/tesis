@@ -2,7 +2,7 @@ import cv2
 from ultralytics import YOLO
 
 # Cargar el modelo YOLO
-model = YOLO("runs/detect/train/weights/best.pt")
+#model = YOLO("runs/detect/train/weights/best.pt")
 
 def mostrar_stream(url, nombre_ventana="Camara"):
     # Crear una instancia de VideoCapture con la URL proporcionada
@@ -22,13 +22,13 @@ def mostrar_stream(url, nombre_ventana="Camara"):
             break
 
         # Realizar la predicción con el modelo YOLO
-        resultados = model.predict(frame, imgsz=640)
+        #resultados = model.predict(frame, imgsz=640)
 
         # Dibujar las anotaciones en el fotograma
-        anotaciones = resultados[0].plot()
+        #anotaciones = resultados[0].plot()
 
         # Mostrar el fotograma en una ventana con el nombre proporcionado
-        cv2.imshow(nombre_ventana, anotaciones)
+        cv2.imshow(nombre_ventana, frame)
 
         # Salir si se presiona 'q'
         if cv2.waitKey(1) & 0xFF == ord('q'):
