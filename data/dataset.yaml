@@ -1,0 +1,4 @@
+train: C:\Users\edwin\OneDrive\Documentos\Clases\Tesis\tesis\data\train
+val: C:\Users\edwin\OneDrive\Documentos\Clases\Tesis\tesis\data\val
+nc: 1
+names: ["volleyball"]
