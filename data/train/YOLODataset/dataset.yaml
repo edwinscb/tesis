@@ -1,7 +1,0 @@
-path: \\?\C:\Users\edwin\OneDrive\Documentos\Clases\Tesis\tesis\data\train\images\YOLODataset
-train: images/train
-val: images/val
-test:
-
-names:
-    0: volleyball
