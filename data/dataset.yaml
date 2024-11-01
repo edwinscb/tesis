@@ -1,5 +1,5 @@
-train: C:\Users\edwin\Documents\tesis\data\train\YOLODataset
-val: C:\Users\edwin\Documents\tesis\data\val\YOLODataset
+train: D:\tesis\data\train\YOLODataset
+val: D:\tesis\data\val\YOLODataset
 
 nc: 1
 names: ["volleyball"]
