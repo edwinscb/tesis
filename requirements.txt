@@ -1,0 +1,9 @@
+pip install opencv-python          # Instalar la última versión de OpenCV
+pip install numpy                  # Instalar la última versión compatible de numpy
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124  # Instalar la última versión de PyTorch con soporte CUDA 12.4
+pip install ultralytics            # Instalar la última versión de YOLO de Ultralytics
+pip install deep_sort_realtime     # Instalar la última versión de DeepSORT
+pip install scipy                  # Instalar la última versión de scipy
+pip install tensorflow
+pip install pyautogui
+pip install mss
