@@ -24,7 +24,7 @@ def mostrar_pantalla(nombre_ventana="Captura de Pantalla"):
 
             # Realizar la predicción con el modelo YOLO
             resultados = model.predict(frame, imgsz=640)
-
+            detecciones = []
             # Procesar las detecciones
             for result in resultados[0].boxes:
                 x1, y1, x2, y2 = map(int, result.xyxy[0])  # Coordenadas de la caja delimitadora
@@ -33,11 +33,17 @@ def mostrar_pantalla(nombre_ventana="Captura de Pantalla"):
 
                 # Filtrar solo detecciones de balón y ajustar el umbral de confianza
                 if class_id == 0 and conf > 0.5:
+                    detecciones.append({
+                        'box': (x1, y1, x2, y2),
+                        'confidence': conf,
+                        'class_id': class_id
+                    })
                     # Dibujar el rectángulo de la detección y la confianza
                     cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 2)
                     cv2.putText(frame, f"Conf {conf:.2f}", (x1, y1 - 10),
-                                cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
-
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+            
+            print(detecciones)
             # Mostrar el fotograma anotado en una ventana con el nombre proporcionado
             cv2.imshow(nombre_ventana, frame)
 
