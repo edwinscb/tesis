@@ -1,5 +1,0 @@
-train: D:\tesis\data\train\YOLODataset
-val: D:\tesis\data\val\YOLODataset
-
-nc: 1
-names: ["volleyball"]
