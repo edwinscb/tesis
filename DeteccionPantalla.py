@@ -4,7 +4,7 @@ from ultralytics import YOLO
 import mss
 
 # Cargar el modelo YOLO
-model = YOLO("runs/detect/train4/weights/best.pt")  # Ruta del modelo
+model = YOLO("runs/detect/train/weights/best.pt")  # Ruta del modelo
 
 def mostrar_pantalla(nombre_ventana="Captura de Pantalla"):
     """Captura la pantalla y muestra las detecciones del modelo YOLO."""
