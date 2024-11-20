@@ -1,0 +1,7 @@
+path: \\?\D:/tesis/YOLODataset
+train: images/train
+val: images/val
+test:
+
+names:
+  0: volleyball
