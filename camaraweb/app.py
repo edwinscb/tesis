@@ -51,8 +51,10 @@ def handle_video_frame(data):
         # Convertir el ndarray a RGB (si es necesario, depende del modelo)
         annotated_image_rgb = cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)
 
+        # Voltear la imagen horizontalmente (modo espejo)
+        mirrored_image = cv2.flip(annotated_image_rgb, 1)
         # Convertir el ndarray RGB a una imagen de PIL
-        pil_image = Image.fromarray(annotated_image_rgb)
+        pil_image = Image.fromarray(mirrored_image)
 
         # Convierte la imagen procesada nuevamente a base64
         buffered = BytesIO()

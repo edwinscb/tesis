@@ -52,6 +52,10 @@ async function changeCamera() {
 function captureAndSendFrames(stream) {
     const imageCapture = new ImageCapture(stream.getVideoTracks()[0]);
 
+    let errorCount = 0; // Contador de errores consecutivos
+    const maxErrors = 5; // Máximo de intentos fallidos antes de detenerse
+    const baseRetryDelay = 500; // Tiempo base entre reintentos (en ms)
+
     const captureFrame = async () => {
         try {
             const imageBitmap = await imageCapture.grabFrame();
@@ -59,16 +63,33 @@ function captureAndSendFrames(stream) {
 
             // Convertir fotograma a Base64
             const base64Frame = convertFrameToBase64(imageBitmap);
-            if (base64Frame) socket.emit('start_video', { frame: base64Frame });
+            if (base64Frame) {
+                socket.emit('start_video', { frame: base64Frame });
+                errorCount = 0; // Reiniciar contador si la captura es exitosa
+            }
 
-            setTimeout(captureFrame, 45); // Repite cada 100 ms
+            setTimeout(captureFrame, 40); // Repite cada 45 ms
+
         } catch (err) {
             console.error("Error al capturar fotograma:", err);
+
+            errorCount += 1;
+
+            if (errorCount > maxErrors) {
+                console.warn("Se alcanzó el límite de intentos fallidos. Deteniendo captura.");
+                return; // Detener la captura si se exceden los errores permitidos
+            }
+
+            // Retraso progresivo en caso de errores continuos
+            const retryDelay = baseRetryDelay * errorCount; // Aumentar el retraso según el número de errores
+            console.log(`Reintentando en ${retryDelay} ms...`);
+            setTimeout(captureFrame, retryDelay);
         }
     };
 
     captureFrame(); // Llama por primera vez
 }
+
 
 // Convierte un fotograma (ImageBitmap) en una cadena Base64
 function convertFrameToBase64(imageBitmap) {
