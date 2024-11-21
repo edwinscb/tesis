@@ -1,87 +1,75 @@
-// Conexión al servidor de WebSocket
+// Establece conexión al servidor mediante WebSocket
 const socket = io();
 
-// Obtiene la referencia a los elementos del DOM
+// Referencias a elementos del DOM
 const videoElement = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-const fpsDisplay = document.getElementById("fps");
 
-// Configura la cámara
-navigator.mediaDevices.getUserMedia({ video: true })
-    .then(stream => {
+// Configura la cámara y comienza la transmisión
+async function initializeCamera() {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
         videoElement.srcObject = stream;
-        // Enviar el video al servidor
-        sendVideoFrames(stream);
-    })
-    .catch(err => {
-        console.error("Error al acceder a la cámara: ", err);
-    });
-
-// Enviar fotogramas al servidor
-function sendVideoFrames(stream) {
-    const track = stream.getVideoTracks()[0];
-    const imageCapture = new ImageCapture(track);
-
-    // Función para capturar y enviar los fotogramas al servidor
-    function captureFrame() {
-        imageCapture.grabFrame()
-            .then(imageBitmap => {
-                if (!imageBitmap) {
-                    console.error("Error: Fotograma vacío");
-                    return;
-                }
-                
-                // Convierte la imagen en un canvas
-                ctx.drawImage(imageBitmap, 0, 0, canvas.width, canvas.height);
-
-                // Convierte el canvas a base64
-                const base64Frame = canvas.toDataURL('image/jpeg');
-
-                // Envia el fotograma al servidor
-                socket.emit('start_video', { frame: base64Frame });
-
-                // Llama nuevamente a la función para enviar el siguiente fotograma
-                requestAnimationFrame(captureFrame);
-            })
-            .catch(err => {
-                console.error("Error al capturar el fotograma: ", err);
-            });
+        captureAndSendFrames(stream); // Inicia la captura y envío de fotogramas
+    } catch (err) {
+        console.error("Error al acceder a la cámara:", err);
     }
-
-    captureFrame();
 }
 
-// Recibir el fotograma procesado del servidor
-socket.on('video_frame', data => {
-    console.log("Recibiendo fotograma procesado (escala de grises)");
+// Captura y envía fotogramas al servidor
+function captureAndSendFrames(stream) {
+    const imageCapture = new ImageCapture(stream.getVideoTracks()[0]);
     
-    // Decodifica el fotograma y lo dibuja en el canvas
-    const img = new Image();
-    img.src = 'data:image/jpeg;base64,' + data.frame;
-    img.onload = () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    const captureFrame = async () => {
+        try {
+            const imageBitmap = await imageCapture.grabFrame();
+            if (!imageBitmap) throw new Error("Fotograma vacío");
+
+            // Convertir fotograma a Base64
+            const base64Frame = convertFrameToBase64(imageBitmap);
+            if (base64Frame) socket.emit('start_video', { frame: base64Frame });
+
+            setTimeout(captureFrame, 100); // Repite cada 100 ms
+        } catch (err) {
+            console.error("Error al capturar fotograma:", err);
+        }
     };
+
+    captureFrame(); // Llama por primera vez
+}
+
+// Convierte un fotograma (ImageBitmap) en una cadena Base64
+function convertFrameToBase64(imageBitmap) {
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = imageBitmap.width;
+    tempCanvas.height = imageBitmap.height;
+
+    const tempCtx = tempCanvas.getContext('2d');
+    tempCtx.drawImage(imageBitmap, 0, 0);
+
+    return tempCanvas.toDataURL('image/jpeg');
+}
+
+// Dibuja un fotograma procesado en el canvas
+function displayProcessedFrame(base64Frame) {
+    const img = new Image();
+    img.src = `data:image/jpeg;base64,${base64Frame}`;
+
+    img.onload = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpia el canvas
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height); // Dibuja la nueva imagen
+    };
+}
+
+// Escucha los fotogramas procesados desde el servidor
+socket.on('video_frame', (data) => {
+    if (data.frame) {
+        displayProcessedFrame(data.frame);
+    } else {
+        console.warn("Fotograma vacío recibido del servidor");
+    }
 });
 
-
-
-// Mostrar el FPS (opcional)
-let lastTime = 0;
-let frameCount = 0;
-
-function updateFPS() {
-    const currentTime = performance.now();
-    const deltaTime = (currentTime - lastTime) / 1000;
-    lastTime = currentTime;
-
-    if (deltaTime > 0) {
-        const fps = (1 / deltaTime).toFixed(2);
-        fpsDisplay.textContent = `FPS: ${fps}`;
-    }
-
-    requestAnimationFrame(updateFPS);
-}
-
-updateFPS();
+// Inicializa la cámara al cargar el script
+initializeCamera();

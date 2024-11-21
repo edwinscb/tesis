@@ -1,55 +1,42 @@
-from flask import Flask, render_template
-from flask_socketio import SocketIO, emit
-import cv2
 import base64
-import numpy as np
+from io import BytesIO
+from flask import Flask, render_template, request, jsonify
+from flask_socketio import SocketIO, emit
+from PIL import Image, ImageOps
+import io
 
+# Configuración de Flask y SocketIO
 app = Flask(__name__)
 socketio = SocketIO(app)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
-
-@socketio.on('connect')
-def handle_connect():
-    print("Cliente conectado")
-    emit('status', {'message': 'Conexión establecida'})
-
-@socketio.on('disconnect')
-def handle_disconnect():
-    print("Cliente desconectado")
+    return render_template('index.html')  # Tu archivo HTML donde se carga el video
 
 @socketio.on('start_video')
-def start_video(data):
-    # Recibe el fotograma en base64 desde el cliente
-    frame_data = data.get('frame')
-    
-    if not frame_data:
-        return
-    
-    # Decodifica el fotograma de base64 a una imagen
+def handle_video_frame(data):
     try:
-        img_data = base64.b64decode(frame_data)
-        np_arr = np.frombuffer(img_data, np.uint8)
-        frame = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
-        
-        if frame is None:
-            return
+        # Extrae la cadena base64
+        base64_string = data['frame']
+        # Elimina el prefijo 'data:image/jpeg;base64,' de la cadena
+        img_data = base64.b64decode(base64_string.split(',')[1])
+
+        # Decodifica la imagen en base64
+        image = Image.open(BytesIO(img_data))
+
+        # Procesa la imagen (ejemplo: convertirla a escala de grises)
+        image = ImageOps.grayscale(image)
+
+        # Convierte la imagen procesada nuevamente a base64
+        buffered = BytesIO()
+        image.save(buffered, format="JPEG")
+        processed_image_base64 = base64.b64encode(buffered.getvalue()).decode('utf-8')
+
+        # Envía el fotograma procesado al cliente
+        emit('video_frame', {'frame': processed_image_base64})
+
     except Exception as e:
         print(f"Error al procesar el fotograma: {e}")
-        return
-    
-    # Convierte el fotograma a escala de grises
-    gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    cv2.imwrite("D:/tesis/camaraweb/templates", gray_frame)
-    # Convierte el fotograma en escala de grises a formato JPEG
-    _, buffer = cv2.imencode('.jpg', gray_frame)
-    frame_encoded = base64.b64encode(buffer).decode('utf-8')
-    
-    # Envía el fotograma procesado (en escala de grises) al cliente
-    emit('video_frame', {'frame': frame_encoded})
-
-
+        emit('video_frame', {'frame': None})  # Envía None si hubo un error
 if __name__ == '__main__':
     socketio.run(app, debug=True, host='0.0.0.0', port=5000, ssl_context=('D:\\tesis\\server.crt', 'D:\\tesis\\server.key'))
