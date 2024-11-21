@@ -61,7 +61,7 @@ function captureAndSendFrames(stream) {
             const base64Frame = convertFrameToBase64(imageBitmap);
             if (base64Frame) socket.emit('start_video', { frame: base64Frame });
 
-            setTimeout(captureFrame, 10); // Repite cada 100 ms
+            setTimeout(captureFrame, 45); // Repite cada 100 ms
         } catch (err) {
             console.error("Error al capturar fotograma:", err);
         }

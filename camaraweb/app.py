@@ -33,7 +33,19 @@ def handle_video_frame(data):
         # Realiza la detección con el modelo YOLO
         results = model(image)  # Detecta objetos en la imagen
 
-        # Procesa la imagen: dibujar resultados
+        # Filtrar las detecciones con un umbral de confianza > 0.5
+        detections = []
+        for result in results:
+            for box in result.boxes:
+                conf = box.conf[0].item()  # Confianza de la detección
+                if conf > 0.5:  # Filtro de confianza
+                    detections.append({
+                        'box': box.xyxy[0].tolist(),  # Coordenadas de la caja delimitadora
+                        'confidence': conf,
+                        'class_id': int(box.cls[0].item())  # Clase detectada
+                    })
+
+        # Procesar la imagen: dibujar resultados solo para detecciones con alta confianza
         annotated_image = results[0].plot()  # Añade las anotaciones de detección
 
         # Convertir el ndarray a RGB (si es necesario, depende del modelo)
