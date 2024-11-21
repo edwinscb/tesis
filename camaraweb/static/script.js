@@ -2,7 +2,6 @@
 const socket = io();
 
 // Referencias a elementos del DOM
-const videoElement = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const changeCameraButton = document.getElementById("change-camera");
@@ -23,7 +22,7 @@ async function getCameras() {
     }
 }
 
-// Configura la cámara y comienza la transmisión
+// Configura la cámara y comienza la transmisión (pero no mostrar el video)
 async function initializeCamera(cameraId) {
     try {
         // Detener la cámara actual si ya está en uso
@@ -35,7 +34,8 @@ async function initializeCamera(cameraId) {
         const videoDevices = await getCameras();
         const constraints = { video: { deviceId: videoDevices[cameraId].deviceId } };
         stream = await navigator.mediaDevices.getUserMedia(constraints);
-        videoElement.srcObject = stream;
+
+        // Inicia la captura y envío de fotogramas, pero no mostrar el video
         captureAndSendFrames(stream); // Inicia la captura y envío de fotogramas
     } catch (err) {
         console.error("Error al acceder a la cámara:", err);
@@ -61,7 +61,7 @@ function captureAndSendFrames(stream) {
             const base64Frame = convertFrameToBase64(imageBitmap);
             if (base64Frame) socket.emit('start_video', { frame: base64Frame });
 
-            setTimeout(captureFrame, 40); // Repite cada 100 ms
+            setTimeout(captureFrame, 10); // Repite cada 100 ms
         } catch (err) {
             console.error("Error al capturar fotograma:", err);
         }
