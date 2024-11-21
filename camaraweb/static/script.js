@@ -96,9 +96,11 @@ function displayProcessedFrame(base64Frame) {
 // Escucha los fotogramas procesados desde el servidor
 socket.on('video_frame', (data) => {
     if (data.frame) {
+        console.log("Fotograma procesado recibido", data.frame);
         displayProcessedFrame(data.frame);
     } else {
         console.warn("Fotograma vacío recibido del servidor");
+        
     }
 });
 
