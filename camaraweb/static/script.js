@@ -68,7 +68,7 @@ function captureAndSendFrames(stream) {
                 errorCount = 0; // Reiniciar contador si la captura es exitosa
             }
 
-            setTimeout(captureFrame, 40); // Repite cada 45 ms
+            setTimeout(captureFrame, 50); // Repite cada 45 ms
 
         } catch (err) {
             console.error("Error al capturar fotograma:", err);
@@ -130,3 +130,26 @@ initializeCamera(currentCameraId);
 
 // Asocia la acción de cambiar de cámara al botón
 changeCameraButton.addEventListener("click", changeCamera);
+// Función para ajustar el tamaño del canvas
+function resizeCanvas() {
+    const canvas = document.getElementById("canvas");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+// Llama la función al cargar la página y al cambiar el tamaño de la ventana
+window.addEventListener("load", resizeCanvas);
+window.addEventListener("resize", resizeCanvas);
+// Detectar interacción inicial para pantalla completa
+document.addEventListener("click", () => {
+    const canvasContainer = canvas.parentNode;
+    if (canvasContainer.requestFullscreen) {
+        canvasContainer.requestFullscreen();
+    } else if (canvasContainer.webkitRequestFullscreen) {
+        canvasContainer.webkitRequestFullscreen();
+    } else if (canvasContainer.msRequestFullscreen) {
+        canvasContainer.msRequestFullscreen();
+    }
+    resizeCanvas(); // Ajustar el canvas al nuevo tamaño
+}, { once: true });
+

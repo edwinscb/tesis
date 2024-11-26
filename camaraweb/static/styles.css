@@ -3,43 +3,57 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     text-align: center;
-    padding: 20px;
+    margin: 0; /* Elimina márgenes innecesarios */
+    padding: 0; /* Evita redundancia en los valores */
+    overflow: hidden; /* Evita barras de desplazamiento */
+    height: 100%; /* Asegura que el cuerpo ocupe toda la altura */
 }
 
+/* Títulos */
 h1 {
     color: #333;
+    margin: 20px 0; /* Espaciado adecuado entre el título y otros elementos */
 }
 
-video {
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    margin-top: 20px;
-}
-
+/* Estilo para el canvas */
 canvas {
-    display: block;
-    margin: 20px auto;
-    border: 2px solid #ccc;
-    border-radius: 8px;
+    display: block; /* Centra el canvas automáticamente */
+    width: 100vw; /* Ocupa todo el ancho de la ventana */
+    height: 100vh; /* Ocupa todo el alto de la ventana */
+    object-fit: cover; /* Ajusta el contenido al tamaño del canvas */
+    border: none; /* Elimina bordes innecesarios para pantalla completa */
+    margin: 0; /* Asegura que no haya espacio alrededor del canvas */
 }
 
+/* Estilo para el texto de FPS */
 #fps {
     margin-top: 10px;
     font-size: 18px;
     color: #555;
 }
 
+/* Estilo de los botones */
 button {
-    margin-top: 20px;
+    margin-top: 20px; /* Espaciado uniforme con otros elementos */
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
     border: none;
-    background-color: #4CAF50;
+    background-color: #4CAF50; /* Color principal */
     color: white;
     border-radius: 5px;
+    transition: background-color 0.3s ease; /* Efecto suave al pasar el mouse */
 }
 
+/* Efecto hover en los botones */
 button:hover {
-    background-color: #45a049;
+    background-color: #45a049; /* Color más oscuro al pasar el mouse */
+}
+
+/* Estilo para el video (si está visible) */
+video {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    margin-top: 20px;
+    display: none; /* Oculto por defecto si no es necesario */
 }
