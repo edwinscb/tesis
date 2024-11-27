@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video en Escala de Grises</title>
+    <title>Modelo volleyball</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Video en Escala de Grises</h1>
-    <video id="video" width="640" height="480" autoplay style="display:none;"></video>
-    <canvas id="canvas" width="640" height="480"></canvas>
-    <div id="fps"></div>
-
-    <!-- Botón para cambiar la cámara -->
+    <h1>Modelo volleyball</h1>
+    <video id="video"autoplay style="display:none;"></video>
+    <canvas id="canvas"></canvas>
     <button id="change-camera">Cambiar Cámara</button>
-
+    <button id="fullscreenButton">Pantalla completa</button>
+    
     <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
