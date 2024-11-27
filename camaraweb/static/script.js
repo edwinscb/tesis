@@ -62,6 +62,7 @@ function captureAndSendFrames(stream) {
             }
 
             setTimeout(captureFrame, 100);
+
         } catch (err) {
             console.error("Error al capturar fotograma:", err);
             errorCount++;
