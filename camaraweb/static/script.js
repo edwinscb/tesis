@@ -11,7 +11,7 @@ const title = document.querySelector("h1");
 
 let currentCameraId = 0;
 let stream;
-let isDetect = false;
+let isTrack = false;
 
 async function getCameras() {
     try {
@@ -101,14 +101,16 @@ function displayProcessedFrame(base64Frame) {
     };
 }
 modelButton.addEventListener("click", () => {
-    if (isDetect) {
+    if (isTrack) {
         title.textContent = "Modelo : detección";
         modelButton.textContent = "Tracking";
     } else {
         title.textContent = "Modelo : tracking";
         modelButton.textContent = "Detección";
     }
-    isDetect = !isDetect;
+    isTrack = !isTrack;
+    socket.emit('model_toggle', { isTrack });
+
 });
 function toggleFullscreen() {
     if (canvas.requestFullscreen) {
