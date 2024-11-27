@@ -6,10 +6,12 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const changeCameraButton = document.getElementById("change-camera");
 const fullscreenButton = document.getElementById("fullscreenButton");
-
+const modelButton = document.getElementById("modelButton");
+const title = document.querySelector("h1");
 
 let currentCameraId = 0;
 let stream;
+let isDetect = false;
 
 async function getCameras() {
     try {
@@ -98,7 +100,16 @@ function displayProcessedFrame(base64Frame) {
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
     };
 }
-
+modelButton.addEventListener("click", () => {
+    if (isDetect) {
+        title.textContent = "Modelo : detección";
+        modelButton.textContent = "Tracking";
+    } else {
+        title.textContent = "Modelo : tracking";
+        modelButton.textContent = "Detección";
+    }
+    isDetect = !isDetect;
+});
 function toggleFullscreen() {
     if (canvas.requestFullscreen) {
         canvas.requestFullscreen();
