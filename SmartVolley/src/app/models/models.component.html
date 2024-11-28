@@ -1,6 +1,4 @@
-<h1>{{ title }}</h1>
-<video id="video" autoplay width="640" height="480" style="display:none;"></video>
-<canvas #canvas width="640" height="480"></canvas>
-<button (click)="changeCamera()">Cambiar Cámara</button>
-<button (click)="toggleFullscreen(canvas)">Pantalla completa</button>
-<button (click)="toggleModel()">{{ isTrack ? 'Detección' : 'Tracking' }}</button>
+<div class="video-container">
+    <!-- Usamos la referencia #videoElement para acceder al video -->
+    <video #videoElement autoplay playsinline></video>
+  </div>
