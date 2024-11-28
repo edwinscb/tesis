@@ -1,4 +1,4 @@
-// styles/navbar.scss
+@use "sass:color"; // Importa el módulo de funciones de color
 
 // Variables de color
 $primary-color: #4CAF50; // Color verde
@@ -23,7 +23,7 @@ $disabled-color: #6c757d; // Color para elementos deshabilitados
   .navbar-nav {
     .nav-item {
       padding: 0 15px;
-      
+
       .nav-link {
         color: #333;
         font-weight: bold;
@@ -91,8 +91,8 @@ $disabled-color: #6c757d; // Color para elementos deshabilitados
     margin-left: 10px;
 
     &:hover {
-      background-color: darken($primary-color, 10%);
-      border-color: darken($primary-color, 10%);
+      background-color: color.scale($primary-color, $lightness: -10%);
+      border-color: color.scale($primary-color, $lightness: -10%);
     }
   }
 }

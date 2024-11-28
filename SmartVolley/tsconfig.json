@@ -3,6 +3,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "lib": ["esnext", "dom"],
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
