@@ -102,11 +102,9 @@ function displayProcessedFrame(base64Frame) {
 }
 modelButton.addEventListener("click", () => {
     if (isTrack) {
-        title.textContent = "Modelo : detección";
-        modelButton.textContent = "Tracking";
+        title.textContent = "Detección";
     } else {
-        title.textContent = "Modelo : tracking";
-        modelButton.textContent = "Detección";
+        title.textContent = "Seguimiento";
     }
     isTrack = !isTrack;
     socket.emit('model_toggle', { isTrack });

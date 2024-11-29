@@ -58,7 +58,7 @@
         </div>
       </nav>
     
-      <h1>{{ title }}</h1>
+      <h1 id="title">Deteccion o Seguimiento</h1>
               <video id="video"></video>
       
       <div class="canvas-container">
@@ -68,7 +68,7 @@
       <div class="controls">
         <button id="fullscreenButton"(click)="toggleFullScreen()">Pantalla Completa</button>
         <button id="change-camera"(click)="switchCamera()">Cambiar Cámara</button>
-        <button id="modelButton"(click)="toggleTitle()">Cambiar Título</button>
+        <button id="modelButton"(click)="toggleTitle()">Cambiar Modelo</button>
       </div>
     
     <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
