@@ -2,22 +2,22 @@
    Variables de color
    =========================== */
    :root {
-    --primary-color: #4CAF50;
-    --secondary-color: #f8f9fa;
-    --highlight-color: #007bff;
-    --disabled-color: #6c757d;
-    --font-family: 'Arial', sans-serif;
+    --primary-color: #4CAF50; /* Color principal (verde) */
+    --secondary-color: #f8f9fa; /* Color de fondo (gris claro) */
+    --highlight-color: #007bff; /* Color de resaltado (azul) */
+    --disabled-color: #6c757d; /* Color para elementos deshabilitados */
+    --font-family: 'Arial', sans-serif; /* Fuente predeterminada */
 }
 
 /* ===========================
    Estilos generales
    =========================== */
 body {
-    font-family: var(--font-family);
+    font-family: var(--font-family); /* Fuente global */
     margin: 0;
     padding: 0;
-    background-color: var(--secondary-color);
-    color: #333;
+    background-color: var(--secondary-color); /* Fondo claro */
+    color: #333; /* Color de texto */
 }
 
 h1 {
@@ -29,16 +29,16 @@ h1 {
     margin-bottom: 20px;
     padding: 10px;
     color: transparent;
-    background: linear-gradient(135deg, var(--primary-color), var(--highlight-color));
+    background: linear-gradient(135deg, var(--primary-color), var(--highlight-color)); /* Gradiente de color para título */
     background-clip: text;
     -webkit-background-clip: text; /* Soporte para Chrome y Safari */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease; /* Transición suave */
 }
 
 h1:hover {
-    color: var(--highlight-color);
-    transform: translateY(-2px);
+    color: var(--highlight-color); /* Resaltado del título al pasar el mouse */
+    transform: translateY(-2px); /* Efecto de elevación */
 }
 
 /* ===========================
@@ -48,28 +48,30 @@ h1:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-color); /* Fondo para el contenedor */
     padding: 20px;
     margin: 20px 0;
     max-width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
 }
 
 .canvas-container canvas {
-    width: 100%;
-    max-width: 800px;
-    border-radius: 8px;
+    border-radius: 8px; /* Bordes redondeados en el canvas */
 }
 
 /* ===========================
    Video (ocultar espacio)
    =========================== */
 #video {
-    display: none;
-    width: 0;
-    height: 0;
+    display: none; /* Ocultar el video */
     overflow: hidden;
+}
+
+/* Estilo para la cámara activa en la lista */
+.active-camera {
+    background-color: #28a745 !important; /* Fondo verde para la cámara activa */
+    color: white;
 }
 
 /* ===========================
@@ -80,24 +82,24 @@ h1:hover {
     justify-content: center;
     gap: 15px;
     padding: 10px;
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-color); /* Fondo claro */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .controls button {
-    background-color: var(--primary-color);
+    background-color: var(--primary-color); /* Fondo verde */
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 20px;
     font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s; /* Transición suave para el fondo */
 }
 
 .controls button:hover {
-    background-color: #3e8e41;
+    background-color: #3e8e41; /* Cambio de fondo al pasar el mouse */
 }
 
 .controls button:focus {
@@ -105,7 +107,7 @@ h1:hover {
 }
 
 .controls button.disabled {
-    background-color: var(--disabled-color);
+    background-color: var(--disabled-color); /* Fondo gris para deshabilitar el botón */
     pointer-events: none;
 }
 
@@ -113,15 +115,15 @@ h1:hover {
    Navbar
    =========================== */
 .navbar {
-    background-color: var(--secondary-color);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--secondary-color); /* Fondo claro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra en el navbar */
     padding: 10px 20px;
 }
 
 .navbar .navbar-brand img {
-    width: 64px;
+    width: 64px; /* Tamaño de la imagen del logo */
     height: 64px;
-    border-radius: 50%;
+    border-radius: 50%; /* Bordes redondeados */
 }
 
 .navbar .navbar-nav {
@@ -136,33 +138,33 @@ h1:hover {
 }
 
 .navbar .navbar-nav .nav-link {
-    color: #333;
+    color: #333; /* Color de los enlaces */
     font-weight: bold;
-    transition: color 0.3s;
+    transition: color 0.3s; /* Transición para el color */
 }
 
 .navbar .navbar-nav .nav-link:hover {
-    color: var(--highlight-color);
+    color: var(--highlight-color); /* Resaltado de enlace al pasar el mouse */
     text-decoration: none;
 }
 
 .navbar .navbar-nav .nav-link.active {
-    color: var(--primary-color);
+    color: var(--primary-color); /* Color para el enlace activo */
 }
 
 .navbar .navbar-nav .nav-link.disabled {
-    color: var(--disabled-color);
+    color: var(--disabled-color); /* Color para los enlaces deshabilitados */
     pointer-events: none;
 }
 
 .navbar .navbar-nav .dropdown-menu {
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-color); /* Fondo del menú desplegable */
     border: 1px solid #ddd;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .navbar .form-control {
-    width: 300px;
+    width: 300px; /* Ancho de la barra de búsqueda */
     border-radius: 20px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -170,20 +172,20 @@ h1:hover {
 
 .navbar .form-control:focus {
     outline: none;
-    border-color: var(--primary-color);
+    border-color: var(--primary-color); /* Color al enfocar la barra de búsqueda */
 }
 
 .navbar .btn-outline-success {
-    background-color: var(--primary-color);
+    background-color: var(--primary-color); /* Fondo verde para el botón de búsqueda */
     color: white;
     border-radius: 20px;
     padding: 8px 20px;
     margin-left: 10px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s; /* Transición de color al pasar el mouse */
 }
 
 .navbar .btn-outline-success:hover {
-    background-color: #3e8e41;
+    background-color: #3e8e41; /* Cambio de fondo al pasar el mouse */
 }
 
 /* ===========================
@@ -191,16 +193,16 @@ h1:hover {
    =========================== */
 @media (max-width: 768px) {
     .canvas-container {
-        padding: 15px;
+        padding: 15px; /* Reducción del padding en pantallas pequeñas */
     }
 
     .controls {
-        flex-direction: column;
+        flex-direction: column; /* Disposición vertical de los botones */
         gap: 10px;
     }
 
     .navbar .navbar-nav {
-        flex-direction: column;
+        flex-direction: column; /* Disposición vertical de los enlaces */
         text-align: center;
     }
 
