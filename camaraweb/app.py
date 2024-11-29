@@ -10,7 +10,7 @@ from collections import defaultdict
 
 
 app = Flask(__name__)
-model = YOLO("D:/tesis/runs/detect/yolo11l/weights/best.pt")
+model = YOLO("YOLODataset/runs/detect/yolo11l/weights/best.pt")
 socketio = SocketIO(app)
 
 is_track_active = False 
@@ -110,4 +110,4 @@ def handle_video_frame(data):
         emit('video_frame', {'frame': None})
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True, host='0.0.0.0', port=5000, ssl_context=('D:\\tesis\\server.crt', 'D:\\tesis\\server.key'))
+    socketio.run(app, debug=True, host='0.0.0.0', port=5000, ssl_context=('camaraweb/server.crt', 'camaraweb/server.key'))
