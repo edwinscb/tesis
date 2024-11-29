@@ -1,0 +1,215 @@
+/* ===========================
+   Variables de color
+   =========================== */
+   :root {
+    --primary-color: #4CAF50; /* Color principal (verde) */
+    --secondary-color: #f8f9fa; /* Color de fondo (gris claro) */
+    --highlight-color: #007bff; /* Color de resaltado (azul) */
+    --disabled-color: #6c757d; /* Color para elementos deshabilitados */
+    --font-family: 'Arial', sans-serif; /* Fuente predeterminada */
+}
+
+/* ===========================
+   Estilos generales
+   =========================== */
+body {
+    font-family: var(--font-family); /* Fuente global */
+    margin: 0;
+    padding: 0;
+    background-color: var(--secondary-color); /* Fondo claro */
+    color: #333; /* Color de texto */
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    padding: 10px;
+    color: transparent;
+    background: linear-gradient(135deg, var(--primary-color), var(--highlight-color)); /* Gradiente de color para título */
+    background-clip: text;
+    -webkit-background-clip: text; /* Soporte para Chrome y Safari */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, color 0.3s ease; /* Transición suave */
+}
+
+h1:hover {
+    color: var(--highlight-color); /* Resaltado del título al pasar el mouse */
+    transform: translateY(-2px); /* Efecto de elevación */
+}
+
+/* ===========================
+   Contenedor del canvas
+   =========================== */
+.canvas-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-color); /* Fondo para el contenedor */
+    padding: 10px;
+    margin: 10px 0;
+    max-width: 100%;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+.canvas-container canvas {
+    border-radius: 8px; /* Bordes redondeados en el canvas */
+    
+}
+
+/* ===========================
+   Video (ocultar espacio)
+   =========================== */
+#video {
+    display: none; /* Ocultar el video */
+    overflow: hidden;
+    
+}
+
+/* Estilo para la cámara activa en la lista */
+.active-camera {
+    background-color: #28a745 !important; /* Fondo verde para la cámara activa */
+    color: white;
+}
+
+/* ===========================
+   Controles
+   =========================== */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px;
+    background-color: var(--secondary-color); /* Fondo claro */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.controls button {
+    background-color: var(--primary-color); /* Fondo verde */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Transición suave para el fondo */
+}
+
+.controls button:hover {
+    background-color: #3e8e41; /* Cambio de fondo al pasar el mouse */
+}
+
+.controls button:focus {
+    outline: none;
+}
+
+.controls button.disabled {
+    background-color: var(--disabled-color); /* Fondo gris para deshabilitar el botón */
+    pointer-events: none;
+}
+
+/* ===========================
+   Navbar
+   =========================== */
+.navbar {
+    background-color: var(--secondary-color); /* Fondo claro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra en el navbar */
+    padding: 10px 20px;
+    height: 70px;
+}
+
+.navbar .navbar-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.navbar .navbar-nav .nav-item {
+    padding: 0 15px;
+}
+
+.navbar .navbar-nav .nav-link {
+    color: #333; /* Color de los enlaces */
+    font-weight: bold;
+    transition: color 0.3s; /* Transición para el color */
+    font-size: 1.25rem;
+}
+
+.navbar .navbar-nav .nav-link:hover {
+    color: var(--highlight-color); /* Resaltado de enlace al pasar el mouse */
+    text-decoration: none;
+}
+
+.navbar .navbar-nav .nav-link.active {
+    color: var(--primary-color); /* Color para el enlace activo */
+}
+
+.navbar .navbar-nav .nav-link.disabled {
+    color: var(--disabled-color); /* Color para los enlaces deshabilitados */
+    pointer-events: none;
+}
+
+.navbar .navbar-nav .dropdown-menu {
+    background-color: var(--secondary-color); /* Fondo del menú desplegable */
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-item.dropdown .dropdown-item:hover {
+    background-color: var(--highlight-color); /* Cambia el fondo al pasar el mouse */
+    color: white; /* Color del texto al hacer hover */
+}
+
+.navbar .form-control {
+    width: 300px; /* Ancho de la barra de búsqueda */
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.navbar .form-control:focus {
+    outline: none;
+    border-color: var(--primary-color); /* Color al enfocar la barra de búsqueda */
+}
+
+.navbar .btn-outline-success {
+    background-color: var(--primary-color); /* Fondo verde para el botón de búsqueda */
+    color: white;
+    border-radius: 20px;
+    padding: 8px 20px;
+    margin-left: 10px;
+    transition: background-color 0.3s; /* Transición de color al pasar el mouse */
+}
+
+.navbar .btn-outline-success:hover {
+    background-color: #3e8e41; /* Cambio de fondo al pasar el mouse */
+}
+
+/* ===========================
+   Estilos responsivos
+   =========================== */
+@media (max-width: 768px) {
+    .canvas-container {
+        padding: 15px; /* Reducción del padding en pantallas pequeñas */
+    }
+
+    .controls {
+        flex-direction: column; /* Disposición vertical de los botones */
+        gap: 10px;
+    }
+
+    .navbar .navbar-nav {
+        flex-direction: column; /* Disposición vertical de los enlaces */
+        text-align: center;
+    }
+
+    .navbar .navbar-nav .nav-item {
+        padding: 10px 0;
+    }
+}
