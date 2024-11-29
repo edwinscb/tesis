@@ -46,7 +46,7 @@ def perform_tracking(image):
                     track.pop(0)
 
                 points = np.array(track, np.int32).reshape((-1, 1, 2))
-                cv2.polylines(frame, [points], isClosed=False, color=(0, 255, 0), thickness=2)
+                cv2.polylines(frame, [points], isClosed=False, color=(0, 255, 0), thickness=5)
 
                 x1, y1 = int(x - w / 2), int(y - h / 2)
                 x2, y2 = int(x + w / 2), int(y + h / 2)

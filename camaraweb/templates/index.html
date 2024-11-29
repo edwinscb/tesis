@@ -17,6 +17,7 @@
             <a class="navbar-brand" href="#">
                 <img src="static/smartVolley64x64.png" alt="SmartVolley">
             </a>
+            <a class="navbar-brand fs-1 link-success fw-bold" aria-current="page" href="#">SmartVolley</a>
             
             <!-- Botón para pantallas pequeñas -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,33 +27,26 @@
             <!-- Elementos del menú de navegación -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Demo</a>
+                        <a class="nav-link active" href="#">Inicio</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Modelos
+                            Servicios
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Detección</a></li>
-                            <li><a class="dropdown-item" href="#">Seguimiento</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" routerLink="">Ambos</a></li>
+                            <li><a class="dropdown-item" href="#">Seguimiento de balon</a></li>
+                            <li><a class="dropdown-item" href="#">Videos de aprendizaje</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Descargas</a>
+                        <a class="nav-link disabled" aria-disabled="true">Demo Modelo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="true">Contactanos</a>
                     </li>
                 </ul>
-
-                <!-- Formulario de búsqueda -->
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Buscar</button>
-                </form>
             </div>
         </div>
     </nav>
@@ -64,12 +58,12 @@
 
         <!-- Contenedor del video -->
         <div class="video-container mb-3">
-            <video id="video" autoplay playsinline></video>
+            <video id="video"autoplay playsinline></video>
         </div>
 
         <!-- Contenedor del canvas -->
         <div class="canvas-container mb-3">
-            <canvas id="canvas"></canvas>
+            <canvas id="canvas" width="640" height="480" ></canvas>
         </div>
 
         <!-- Controles para la vista -->

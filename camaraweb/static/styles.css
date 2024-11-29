@@ -49,8 +49,8 @@ h1:hover {
     justify-content: center;
     align-items: center;
     background-color: var(--secondary-color); /* Fondo para el contenedor */
-    padding: 20px;
-    margin: 20px 0;
+    padding: 10px;
+    margin: 10px 0;
     max-width: 100%;
     border-radius: 8px; /* Bordes redondeados */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
@@ -58,6 +58,7 @@ h1:hover {
 
 .canvas-container canvas {
     border-radius: 8px; /* Bordes redondeados en el canvas */
+    
 }
 
 /* ===========================
@@ -66,6 +67,7 @@ h1:hover {
 #video {
     display: none; /* Ocultar el video */
     overflow: hidden;
+    
 }
 
 /* Estilo para la cámara activa en la lista */
@@ -120,12 +122,6 @@ h1:hover {
     padding: 10px 20px;
 }
 
-.navbar .navbar-brand img {
-    width: 64px; /* Tamaño de la imagen del logo */
-    height: 64px;
-    border-radius: 50%; /* Bordes redondeados */
-}
-
 .navbar .navbar-nav {
     display: flex;
     justify-content: center;
@@ -161,6 +157,11 @@ h1:hover {
     background-color: var(--secondary-color); /* Fondo del menú desplegable */
     border: 1px solid #ddd;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-item.dropdown .dropdown-item:hover {
+    background-color: var(--highlight-color); /* Cambia el fondo al pasar el mouse */
+    color: white; /* Color del texto al hacer hover */
 }
 
 .navbar .form-control {

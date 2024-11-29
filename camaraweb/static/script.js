@@ -7,7 +7,7 @@ const changeCameraButton = document.getElementById("change-camera");
 const cameraList = document.getElementById("camera-list");
 const fullscreenButton = document.getElementById("fullscreenButton");
 const modelButton = document.getElementById("modelButton");
-const title = document.querySelector("h1");
+const title = document.getElementById("title");
 
 // Variables globales
 let currentCameraId = 0;
@@ -127,7 +127,7 @@ function captureAndSendFrames(stream) {
                 errorCount = 0; // Resetea el contador de errores
             }
 
-            setTimeout(captureFrame, 100); // Captura el siguiente fotograma después de 100ms
+            setTimeout(captureFrame, 70); // Captura el siguiente fotograma después de 100ms
         } catch (err) {
             console.error("Error al capturar fotograma:", err);
             errorCount++;
@@ -153,9 +153,10 @@ function convertFrameToBase64(imageBitmap) {
     tempCanvas.height = imageBitmap.height;
 
     const tempCtx = tempCanvas.getContext('2d');
-    tempCtx.scale(-1, 1); // Voltea el fotograma horizontalmente
-    tempCtx.drawImage(imageBitmap, -imageBitmap.width, 0);
+    //tempCtx.scale(-1, 1); // Voltea el fotograma horizontalmente
+    //tempCtx.drawImage(imageBitmap, -imageBitmap.width, 0);
 
+    tempCtx.drawImage(imageBitmap, 0, 0); // Dibuja la imagen sin voltear
     return tempCanvas.toDataURL('image/jpeg'); // Convierte el fotograma a base64
 }
 
