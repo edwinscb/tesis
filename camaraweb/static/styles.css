@@ -1,56 +1,81 @@
-/* Variables de color */
-:root {
+/* ===========================
+   Variables de color
+   =========================== */
+   :root {
     --primary-color: #4CAF50;
     --secondary-color: #f8f9fa;
     --highlight-color: #007bff;
     --disabled-color: #6c757d;
     --font-family: 'Arial', sans-serif;
-  }
-  
-  /* Estilos generales del componente de canvas */
-  .canvas-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--secondary-color);
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    max-width: 100%;
-    margin: 20px 0;
-  }
-  
-  .canvas-container canvas {
-    width: 100%;
-    max-width: 800px;
-    border-radius: 8px;
-  }
-  
-  /* Estilos para el título <h1> */
-  h1 {
+}
+
+/* ===========================
+   Estilos generales
+   =========================== */
+body {
     font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+    background-color: var(--secondary-color);
+    color: #333;
+}
+
+h1 {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--primary-color);
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 20px;
     padding: 10px;
-    background: linear-gradient(135deg, var(--primary-color), var(--highlight-color));
-    -webkit-background-clip: text;
     color: transparent;
+    background: linear-gradient(135deg, var(--primary-color), var(--highlight-color));
+    background-clip: text;
+    -webkit-background-clip: text; /* Soporte para Chrome y Safari */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1:hover {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+h1:hover {
     color: var(--highlight-color);
     transform: translateY(-2px);
-    transition: all 0.3s ease;
-  }
-  
-  /* Estilos para los controles */
-  .controls {
+}
+
+/* ===========================
+   Contenedor del canvas
+   =========================== */
+.canvas-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-color);
+    padding: 20px;
+    margin: 20px 0;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.canvas-container canvas {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 8px;
+}
+
+/* ===========================
+   Video (ocultar espacio)
+   =========================== */
+#video {
+    display: none;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+/* ===========================
+   Controles
+   =========================== */
+.controls {
     display: flex;
     justify-content: center;
     gap: 15px;
@@ -58,9 +83,9 @@
     background-color: var(--secondary-color);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .controls button {
+}
+
+.controls button {
     background-color: var(--primary-color);
     color: white;
     border: none;
@@ -69,139 +94,117 @@
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
-  
-  .controls button:hover {
-    background-color: #3e8e41;
-  }
-  #video {
-    display: none; /* El video no se mostrará en la página */
 }
-  .controls button:focus {
+
+.controls button:hover {
+    background-color: #3e8e41;
+}
+
+.controls button:focus {
     outline: none;
-  }
-  
-  .controls button.disabled {
+}
+
+.controls button.disabled {
     background-color: var(--disabled-color);
     pointer-events: none;
-  }
-  
-  /* Estilos generales de la barra de navegación */
-  .navbar {
+}
+
+/* ===========================
+   Navbar
+   =========================== */
+.navbar {
     background-color: var(--secondary-color);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 10px 20px;
-  }
-  
-  .navbar .navbar-brand img {
+}
+
+.navbar .navbar-brand img {
     width: 64px;
     height: 64px;
     border-radius: 50%;
-  }
-  
-  .navbar .navbar-nav .nav-item {
+}
+
+.navbar .navbar-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.navbar .navbar-nav .nav-item {
     padding: 0 15px;
-  }
-  
-  .navbar .navbar-nav .nav-item .nav-link {
+}
+
+.navbar .navbar-nav .nav-link {
     color: #333;
     font-weight: bold;
     transition: color 0.3s;
-  }
-  
-  .navbar .navbar-nav .nav-item .nav-link:hover {
+}
+
+.navbar .navbar-nav .nav-link:hover {
     color: var(--highlight-color);
     text-decoration: none;
-  }
-  
-  .navbar .navbar-nav .nav-item .nav-link.active {
+}
+
+.navbar .navbar-nav .nav-link.active {
     color: var(--primary-color);
-  }
-  
-  .navbar .navbar-nav .nav-item .nav-link.disabled {
+}
+
+.navbar .navbar-nav .nav-link.disabled {
     color: var(--disabled-color);
     pointer-events: none;
-  }
-  
-  .navbar .navbar-nav .nav-item .dropdown-menu {
+}
+
+.navbar .navbar-nav .dropdown-menu {
     background-color: var(--secondary-color);
     border: 1px solid #ddd;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .navbar .navbar-nav .nav-item .dropdown-menu .dropdown-item {
-    color: #333;
-    padding: 10px 20px;
-    font-size: 16px;
-  }
-  
-  .navbar .navbar-nav .nav-item .dropdown-menu .dropdown-item:hover {
-    background-color: var(--highlight-color);
-    color: white;
-  }
-  
-  .navbar .navbar-nav .nav-item .dropdown-menu .dropdown-item:active {
-    background-color: var(--primary-color);
-  }
-  
-  .navbar .navbar-nav .nav-item .dropdown-menu .dropdown-divider {
-    border-top: 1px solid #ddd;
-  }
-  
-  .navbar .form-control {
+}
+
+.navbar .form-control {
     width: 300px;
     border-radius: 20px;
     padding: 10px;
     border: 1px solid #ccc;
-  }
-  
-  .navbar .form-control:focus {
+}
+
+.navbar .form-control:focus {
     outline: none;
     border-color: var(--primary-color);
-  }
-  
-  .navbar .btn-outline-success {
+}
+
+.navbar .btn-outline-success {
     background-color: var(--primary-color);
     color: white;
     border-radius: 20px;
     padding: 8px 20px;
     margin-left: 10px;
-  }
-  
-  .navbar .btn-outline-success:hover {
+    transition: background-color 0.3s;
+}
+
+.navbar .btn-outline-success:hover {
     background-color: #3e8e41;
-    border-color: #3e8e41;
-  }
-  
-  /* Estilos responsivos */
-  @media (max-width: 768px) {
+}
+
+/* ===========================
+   Estilos responsivos
+   =========================== */
+@media (max-width: 768px) {
     .canvas-container {
-      padding: 15px;
+        padding: 15px;
     }
-  
+
     .controls {
-      flex-direction: column;
-      gap: 10px;
+        flex-direction: column;
+        gap: 10px;
     }
-  
+
     .navbar .navbar-nav {
-      flex-direction: column;
-      text-align: center;
+        flex-direction: column;
+        text-align: center;
     }
-  
+
     .navbar .navbar-nav .nav-item {
-      padding: 10px 0;
+        padding: 10px 0;
     }
-  }
-  
-  @media (max-width: 992px) {
-    .navbar .navbar-nav {
-      flex-direction: column;
-      text-align: center;
-    }
-  
-    .navbar .navbar-nav .nav-item {
-      padding: 10px 0;
-    }
-  }
-  
+}
