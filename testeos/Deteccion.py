@@ -2,8 +2,7 @@ import cv2
 from ultralytics import YOLO
 
 # Cargar el modelo YOLO
-model = YOLO("runs/detect/train/weights/best.pt")  # Ruta actualizada
-
+model = YOLO("runs/detect/yolo11l/weights/best.pt")
 def mostrar_stream(indice_camara=0, nombre_ventana="Camara"):
     # Crear una instancia de VideoCapture con el índice de la cámara
     cap = cv2.VideoCapture(indice_camara)

@@ -1,0 +1,97 @@
+@use "sass:color"; // Importa el módulo de funciones de color
+
+// Variables de color
+$primary-color: #4CAF50; // Color verde
+$secondary-color: #f8f9fa; // Color claro para el fondo
+$highlight-color: #007bff; // Color para elementos destacados
+$disabled-color: #6c757d; // Color para elementos deshabilitados
+$font-family: 'Arial', sans-serif; // Fuente base
+
+// Estilos generales del componente de video
+.video-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $secondary-color;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  max-width: 100%;
+  margin: 20px 0;
+
+  video {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 8px;
+  }
+}
+
+// Estilos para el título <h1>
+h1 {
+  font-family: $font-family;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $primary-color;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background: linear-gradient(135deg, $primary-color, $highlight-color);
+  -webkit-background-clip: text;
+  color: transparent;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    color: $highlight-color;
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+  }
+}
+
+// Estilos para los controles
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 10px;
+  background-color: $secondary-color;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+  button {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: color.scale($primary-color, $lightness: -10%);
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &.disabled {
+      background-color: $disabled-color;
+      pointer-events: none;
+    }
+  }
+}
+
+// Estilos responsivos
+@media (max-width: 768px) {
+  .video-container {
+    padding: 15px;
+  }
+
+  .controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
