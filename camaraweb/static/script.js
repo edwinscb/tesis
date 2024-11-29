@@ -69,7 +69,7 @@ function captureAndSendFrames(stream) {
                 errorCount = 0; // Reiniciar contador de errores tras éxito
             }
 
-            setTimeout(captureFrame, 70);
+            setTimeout(captureFrame, 80);
         } catch (err) {
             console.error("Error al capturar fotograma:", err);
             errorCount++;
@@ -95,7 +95,8 @@ function convertFrameToBase64(imageBitmap) {
     tempCanvas.height = imageBitmap.height;
 
     const tempCtx = tempCanvas.getContext('2d');
-    tempCtx.drawImage(imageBitmap, 0, 0);
+    tempCtx.scale(-1, 1);
+    tempCtx.drawImage(imageBitmap, -imageBitmap.width, 0);
 
     return tempCanvas.toDataURL('image/jpeg');
 }
@@ -107,12 +108,7 @@ function displayProcessedFrame(base64Frame) {
 
     img.onload = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Aplicar el efecto espejo
-        ctx.save(); // Guardar el estado actual del contexto
-        ctx.scale(-1, 1); // Escalar en el eje X
-        ctx.translate(-canvas.width, 0); // Mover la imagen al lado visible
-        
+                
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
         ctx.restore(); // Restaurar el estado del contexto
     };

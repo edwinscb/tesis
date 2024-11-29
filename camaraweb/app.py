@@ -36,7 +36,6 @@ def perform_tracking(image):
     # Convertir imagen de PIL a formato OpenCV
     frame = np.array(image)
     frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-    frame = cv2.flip(frame, 1)
 
     # Procesar con el modelo para seguimiento
     results = model.track(
