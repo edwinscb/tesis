@@ -127,7 +127,7 @@ function captureAndSendFrames(stream) {
                 errorCount = 0; // Resetea el contador de errores
             }
 
-            setTimeout(captureFrame, 70); // Captura el siguiente fotograma después de 100ms
+            setTimeout(captureFrame, 80); // Captura el siguiente fotograma después de 100ms
         } catch (err) {
             console.error("Error al capturar fotograma:", err);
             errorCount++;
@@ -166,6 +166,8 @@ function displayProcessedFrame(base64Frame) {
     img.src = `data:image/jpeg;base64,${base64Frame}`;
 
     img.onload = () => {
+        const loadingMessage = document.getElementById('loading-message');
+        loadingMessage.style.display = 'none'; 
         ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpia el canvas
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height); // Dibuja el fotograma procesado
         ctx.restore();
