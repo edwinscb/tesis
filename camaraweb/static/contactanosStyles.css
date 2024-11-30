@@ -5,6 +5,9 @@
     --primary-color: #4CAF50; /* Color principal (verde) */
     --secondary-color: #f8f9fa; /* Fondo claro */
     --text-color: #333; /* Color del texto */
+    --form-bg-color: #ffffff; /* Fondo del formulario */
+    --form-border-color: #ddd; /* Borde del formulario */
+    --btn-hover-color: #3e8e41; /* Color del botón al pasar */
 }
 
 /* ===========================
@@ -32,28 +35,41 @@ p {
 }
 
 /* ===========================
-   Video
+   Contenedor
    =========================== */
-.video-container {
-    margin: 20px 0;
-    text-align: center;
-}
-
-.video-container iframe {
-    border-radius: 10px;
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
 }
 
 /* ===========================
-   Botones
+   Formulario
    =========================== */
-.btn {
+.contact-form {
+    background-color: var(--form-bg-color);
+    border: 1px solid var(--form-border-color);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form .form-label {
+    font-weight: bold;
+}
+
+.contact-form .form-control {
+    border-radius: 5px;
+}
+
+.contact-form .btn {
     background-color: var(--primary-color);
     color: white;
     transition: background-color 0.3s ease;
 }
 
-.btn:hover {
-    background-color: #3e8e41;
+.contact-form .btn:hover {
+    background-color: var(--btn-hover-color);
 }
 
 /* ===========================

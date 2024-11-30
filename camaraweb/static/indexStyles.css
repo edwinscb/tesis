@@ -1,0 +1,127 @@
+/* ===========================
+   Variables de color
+   =========================== */
+   :root {
+    --primary-color: #4CAF50; /* Color principal (verde) */
+    --secondary-color: #f8f9fa; /* Color de fondo (gris claro) */
+    --highlight-color: #007bff; /* Color de resaltado (azul) */
+    --disabled-color: #6c757d; /* Color para elementos deshabilitados */
+    --font-family: 'Arial', sans-serif; /* Fuente predeterminada */
+    --card-background: #fff; /* Fondo de las tarjetas */
+    --card-border: #ddd; /* Borde de las tarjetas */
+    --button-color: #4CAF50; /* Color del botón */
+    --background-color: #f0f0f0; /* Fondo general de la página */
+}
+
+/* ===========================
+   Estilo global
+   =========================== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ===========================
+   Encabezados
+   =========================== */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* ===========================
+   Tarjetas (Cards)
+   =========================== */
+.card {
+    background-color: var(--card-background);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: default; /* Cursor por defecto */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer; /* Manito al pasar el mouse */
+}
+
+/* ===========================
+   Botones dentro de las tarjetas
+   =========================== */
+.card .btn {
+    display: inline-block;
+    background-color: var(--button-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    cursor: pointer; /* Manito en botones */
+}
+
+.card .btn:hover {
+    background-color: #3e8e41; /* Fondo más oscuro al pasar el mouse */
+}
+
+/* ===========================
+   Grillas
+   =========================== */
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.grid .card {
+    flex: 1 1 calc(25% - 20px); /* Ajusta el tamaño de las tarjetas */
+    max-width: calc(25% - 20px);
+    min-width: 250px;
+}
+
+/* ===========================
+   Estilos responsivos
+   =========================== */
+@media (max-width: 768px) {
+    .grid .card {
+        flex: 1 1 calc(50% - 20px); /* Ajusta a dos columnas en pantallas pequeñas */
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .card {
+        width: 100%; /* Tarjetas toman todo el ancho en móviles */
+    }
+}
+
+@media (max-width: 480px) {
+    .grid .card {
+        flex: 1 1 100%; /* Una columna en pantallas muy pequeñas */
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+}
