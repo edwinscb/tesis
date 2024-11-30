@@ -127,7 +127,7 @@ function captureAndSendFrames(stream) {
                 errorCount = 0; // Resetea el contador de errores
             }
 
-            setTimeout(captureFrame, 80); // Captura el siguiente fotograma después de 100ms
+            setTimeout(captureFrame, 100); // Captura el siguiente fotograma después de 100ms
         } catch (err) {
             console.error("Error al capturar fotograma:", err);
             errorCount++;

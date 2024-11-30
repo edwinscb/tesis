@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartVolley</title>
+
+    <!-- Enlaces a hojas de estilo CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <!-- Logo de la aplicación -->
+            <a class="navbar-brand" href="#">
+                <img src="static/smartVolley64x64.png" alt="SmartVolley">
+            </a>
+            <a class="navbar-brand fs-1 link-success fw-bold" aria-current="page" href="#">SmartVolley</a>
+            
+            <!-- Botón para pantallas pequeñas -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Elementos del menú de navegación -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Servicios
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Seguimiento de balon</a></li>
+                            <li><a class="dropdown-item" href="#">Videos de aprendizaje</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Demo Modelo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="true">Contactanos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="container text-center my-1">
+        <!-- Título -->
+        <h1 id="title">Detección o Seguimiento</h1>
+
+        <!-- Contenedor del video -->
+        <div class="video-container mb-3">
+            <video id="video"autoplay playsinline></video>
+        </div>
+
+        <!-- Contenedor del canvas -->
+        <div class="canvas-container mb-3">
+            <!-- Mensaje de carga -->
+<div id="loading-message" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 24px; color: black; background-color:gold; padding: 20px; border-radius: 10px;">
+    Cargando Camara...
+</div>
+
+            <canvas id="canvas" width="640" height="480" ></canvas>
+        </div>
+
+        <!-- Controles para la vista -->
+        <div class="controls">
+            <!-- Botón para pantalla completa -->
+            <button id="fullscreenButton" class="btn btn-primary me-2">Pantalla Completa</button>
+            
+            <!-- Botón para cambiar modelo -->
+            <button id="modelButton" class="btn btn-success">Cambiar Modelo</button>
+
+            <!-- Dropdown para cambiar cámara -->
+            <div class="dropdown">
+                <button id="change-camera" class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Cambiar Cámara
+                </button>
+                <ul class="dropdown-menu" id="camera-list">
+                    <!-- Las cámaras se agregarán dinámicamente aquí -->
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
