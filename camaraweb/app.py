@@ -19,6 +19,18 @@ history_limit = 40
 @app.route('/')
 def index():
     return render_template('index.html')
+@app.route('/model')
+def model():
+    return render_template('model.html')
+@app.route('/aprendizaje')
+def aprendizaje():
+    return render_template('aprendizaje.html')
+@app.route('/demo')
+def demo():
+    return render_template('demo.html')
+@app.route('/contactanos')
+def contactanos():
+    return render_template('contactanos.html')
 
 @socketio.on('model_toggle')
 def handle_model_toggle(data):

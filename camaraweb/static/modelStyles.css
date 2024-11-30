@@ -114,84 +114,6 @@ h1:hover {
 }
 
 /* ===========================
-   Navbar
-   =========================== */
-.navbar {
-    background-color: var(--secondary-color); /* Fondo claro */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra en el navbar */
-    padding: 10px 20px;
-    height: 70px;
-}
-
-.navbar .navbar-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-}
-
-.navbar .navbar-nav .nav-item {
-    padding: 0 15px;
-}
-
-.navbar .navbar-nav .nav-link {
-    color: #333; /* Color de los enlaces */
-    font-weight: bold;
-    transition: color 0.3s; /* Transición para el color */
-    font-size: 1.25rem;
-}
-
-.navbar .navbar-nav .nav-link:hover {
-    color: var(--highlight-color); /* Resaltado de enlace al pasar el mouse */
-    text-decoration: none;
-}
-
-.navbar .navbar-nav .nav-link.active {
-    color: var(--primary-color); /* Color para el enlace activo */
-}
-
-.navbar .navbar-nav .nav-link.disabled {
-    color: var(--disabled-color); /* Color para los enlaces deshabilitados */
-    pointer-events: none;
-}
-
-.navbar .navbar-nav .dropdown-menu {
-    background-color: var(--secondary-color); /* Fondo del menú desplegable */
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.nav-item.dropdown .dropdown-item:hover {
-    background-color: var(--highlight-color); /* Cambia el fondo al pasar el mouse */
-    color: white; /* Color del texto al hacer hover */
-}
-
-.navbar .form-control {
-    width: 300px; /* Ancho de la barra de búsqueda */
-    border-radius: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-}
-
-.navbar .form-control:focus {
-    outline: none;
-    border-color: var(--primary-color); /* Color al enfocar la barra de búsqueda */
-}
-
-.navbar .btn-outline-success {
-    background-color: var(--primary-color); /* Fondo verde para el botón de búsqueda */
-    color: white;
-    border-radius: 20px;
-    padding: 8px 20px;
-    margin-left: 10px;
-    transition: background-color 0.3s; /* Transición de color al pasar el mouse */
-}
-
-.navbar .btn-outline-success:hover {
-    background-color: #3e8e41; /* Cambio de fondo al pasar el mouse */
-}
-
-/* ===========================
    Estilos responsivos
    =========================== */
 @media (max-width: 768px) {
@@ -202,14 +124,5 @@ h1:hover {
     .controls {
         flex-direction: column; /* Disposición vertical de los botones */
         gap: 10px;
-    }
-
-    .navbar .navbar-nav {
-        flex-direction: column; /* Disposición vertical de los enlaces */
-        text-align: center;
-    }
-
-    .navbar .navbar-nav .nav-item {
-        padding: 10px 0;
     }
 }
