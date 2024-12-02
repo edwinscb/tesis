@@ -8,6 +8,8 @@
     --font-family: 'Arial', sans-serif; /* Fuente predeterminada */
     --card-bg-color: #ffffff; /* Fondo de las tarjetas */
     --card-border-color: #ddd; /* Borde de las tarjetas */
+    --placeholder-bg-color: #f0f0f0; /* Fondo de tarjetas de marcador de posición */
+    --placeholder-text-color: #999; /* Texto de marcador de posición */
     --footer-bg-color: #343a40; /* Fondo del pie de página */
     --footer-text-color: #ffffff; /* Color del texto del pie de página */
 }
@@ -26,10 +28,24 @@ body {
 /* ===========================
    Encabezado
    =========================== */
+h1, h2 {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
 h1 {
     font-size: 2.5rem;
-    font-weight: bold;
-    color: var(--primary-color);
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+p {
+    line-height: 1.6;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
 }
 
 /* ===========================
@@ -40,12 +56,6 @@ h1 {
     margin: auto;
     padding: 20px;
     text-align: center;
-}
-
-p {
-    line-height: 1.6;
-    font-size: 1.1rem;
-    margin-bottom: 30px;
 }
 
 /* ===========================
@@ -83,6 +93,28 @@ p {
     margin-bottom: 20px;
 }
 
+/* Estilos para tarjetas de marcador de posición */
+.placeholder-card {
+    background-color: var(--placeholder-bg-color);
+    color: var(--placeholder-text-color);
+    border: 1px dashed var(--card-border-color);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: none;
+    text-align: center;
+}
+
+.placeholder-card h5 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.placeholder-card p {
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
 /* ===========================
    Botones en las tarjetas
    =========================== */
@@ -100,6 +132,51 @@ p {
 .btn:hover {
     background-color: #0056b3;
     text-decoration: none;
+}
+/* Estilos para el carrusel de canales de interés */
+#canalesCarousel {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.carousel-item img {
+    width: 100%; /* Hace que la imagen ocupe todo el ancho de la diapositiva */
+    object-fit: contain; /* Asegura que la imagen se mantenga dentro de sus dimensiones sin deformarse */
+    max-height: 200px; /* Controla la altura máxima de las imágenes */
+    margin: 0 auto; /* Centra las imágenes */
+}
+
+/* Estilos de los controles del carrusel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: black; /* Cambia el color de los íconos de los controles */
+}
+
+/* Estilo del título de la sección de canales */
+#canalesCarousel h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #28a745; /* Verde de la marca */
+}
+
+/* Espaciado superior e inferior de la sección */
+#canalesCarousel {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+/* Estilos para los nombres de los canales */
+#canalesCarousel a {
+    font-size: 1.2rem; /* Tamaño de fuente del nombre del canal */
+    font-weight: bold; /* Fuente en negrita */
+    color: #28a745; /* Color verde de la marca */
+    margin-top: 10px; /* Espaciado superior */
+    text-decoration: none; /* Quita el subrayado */
+}
+
+/* Cambia el color del nombre del canal cuando el usuario pasa el ratón sobre él */
+#canalesCarousel a:hover {
+    color: #155724; /* Un tono más oscuro de verde */
+    text-decoration: underline; /* Subraya el texto cuando se pasa el ratón */
 }
 
 /* ===========================
@@ -123,6 +200,10 @@ footer p {
 @media (max-width: 768px) {
     h1 {
         font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
     }
 
     .card-title {
