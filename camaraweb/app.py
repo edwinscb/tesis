@@ -20,7 +20,7 @@ history_limit = 40
 def index():
     return render_template('index.html')
 @app.route('/model')
-def model():
+def models():
     return render_template('model.html')
 @app.route('/aprendizaje')
 def aprendizaje():
