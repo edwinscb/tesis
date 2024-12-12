@@ -11,7 +11,8 @@ from collections import defaultdict
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-model = YOLO("YOLO/runs/detect/yolo11l/weights/best.pt")
+model = YOLO("/app/best.pt")
+
 is_track_active = False
 track_history = defaultdict(list)
 history_limit = 40
@@ -105,4 +106,4 @@ def convert_to_base64(frame):
     return base64.b64encode(buffered.getvalue()).decode('utf-8')
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True, host='0.0.0.0', port=5000, ssl_context=('camaraweb/server.crt', 'camaraweb/server.key'))
+    app.run(host='0.0.0.0', port=8080)
