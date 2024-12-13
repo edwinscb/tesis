@@ -1,4 +1,4 @@
-path: \\?\D:/tesis/YOLODataset
+path: \\?\D:/tesis/YOLO
 train: images/train
 val: images/val
 test:

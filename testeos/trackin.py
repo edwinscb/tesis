@@ -3,8 +3,16 @@ import numpy as np
 from ultralytics import YOLO
 from collections import defaultdict
 
+# Configuraciones como variables
+FRAME_WIDTH = 1920  # Ancho del frame
+FRAME_HEIGHT = 1080  # Alto del frame
+LINE_THICKNESS = 3  # Grosor de la línea de tracking
+CONF_THRESHOLD = 0.2  # Umbral de confianza mínimo
+IOU_THRESHOLD = 0.7  # Umbral de IOU para supresión de máximos
+TRACK_HISTORY_LENGTH = 100  # Duración de la línea de tracking en fotogramas
+
 # Inicializar el modelo YOLO y forzar uso de GPU
-model = YOLO("runs/detect/yolo11l/weights/best.pt")
+model = YOLO("YOLO/runs/detect/yolo11l/weights/best.pt")
 
 # Inicializar captura de video
 cap = cv2.VideoCapture(0)
@@ -13,8 +21,8 @@ if not cap.isOpened():
     exit()
 
 # Configurar resolución de captura
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, FRAME_WIDTH)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT)
 
 # Historial de seguimiento
 track_history = defaultdict(list)
@@ -31,12 +39,12 @@ def draw_annotations(frame, results):
                 x, y, w, h = box
                 track = track_history[track_id]
                 track.append((float(x), float(y)))
-                if len(track) > 40:  # Limitar historial
+                if len(track) > TRACK_HISTORY_LENGTH:  # Limitar historial
                     track.pop(0)
 
                 # Dibujar líneas de seguimiento
                 points = np.array(track, np.int32).reshape((-1, 1, 2))
-                cv2.polylines(frame, [points], isClosed=False, color=(0, 255, 0), thickness=2)
+                cv2.polylines(frame, [points], isClosed=False, color=(0, 255, 0), thickness=LINE_THICKNESS)
 
                 # Dibujar caja delimitadora
                 x1, y1 = int(x - w / 2), int(y - h / 2)
@@ -60,9 +68,9 @@ while True:
     results = model.track(frame, 
                           persist=True, 
                           device="cuda",  # Forzar uso de GPU
-                          conf=0.2,       # Umbral de confianza mínimo
-                          iou=0.7,        # Umbral de IOU para supresión de máximos
-                          )      # Mostrar el fotograma anotado
+                          conf=CONF_THRESHOLD,  # Umbral de confianza mínimo
+                          iou=IOU_THRESHOLD,    # Umbral de IOU para supresión de máximos
+                          )  # Mostrar el fotograma anotado
     
     # Anotar el fotograma con las detecciones y trayectorias
     annotated_frame = draw_annotations(frame.copy(), results)
@@ -70,6 +78,7 @@ while True:
     # Mostrar el fotograma anotado
     cv2.imshow("Seguimiento YOLO", annotated_frame)
 
+    # Controlar la velocidad de actualización
     if cv2.waitKey(1) & 0xFF == ord("q"):
         break
 
