@@ -5,21 +5,24 @@ from ultralytics import YOLO
 from collections import defaultdict
 
 # Configuraciones como variables
-FRAME_WIDTH = 640   # Ancho del frame
-FRAME_HEIGHT = 480  # Alto del frame
+FRAME_WIDTH = 800    # Ancho del frame
+FRAME_HEIGHT = 600  # Alto del frame
 LINE_THICKNESS = 2  # Grosor de la línea de tracking
-CONF_THRESHOLD = 0.2  # Umbral de confianza mínimo
-IOU_THRESHOLD = 0.7  # Umbral de IOU para supresión de máximos
+CONF_THRESHOLD = 0.8  # Umbral de confianza mínimo
+IOU_THRESHOLD = 0.5  # Umbral de IOU para supresión de máximos
 TRACK_HISTORY_LENGTH = 80  # Duración de la línea de tracking en fotogramas
 
 # Inicializar el modelo YOLO y forzar uso de GPU
-model = YOLO("YOLO/runs/detect/yolo10n/weights/best.pt")
+model = YOLO("YOLO/runs/detect/yolo11l/weights/best.pt")
 
+# Ruta del video
+VIDEO_PATH = "setter.mp4"
+OUTPUT_PATH = "output_video.mp4"  # Ruta del video de salida
 
-# Inicializar captura de video
-cap = cv2.VideoCapture(0)
+# Inicializar captura de video desde archivo
+cap = cv2.VideoCapture(VIDEO_PATH)
 if not cap.isOpened():
-    print("Error al abrir la cámara.")
+    print("Error al abrir el video.")
     exit()
 
 # Configurar resolución de captura
@@ -27,13 +30,14 @@ cap.set(cv2.CAP_PROP_FRAME_WIDTH, FRAME_WIDTH)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT)
 cv2.setUseOptimized(True)
 
+# Configurar el escritor de video
+fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Códec para MP4
+out = cv2.VideoWriter(OUTPUT_PATH, fourcc, 30.0, (FRAME_WIDTH, FRAME_HEIGHT))  # 30 FPS
+
 # Historial de seguimiento (almacena trayectorias incluso si el objeto no está activo)
 track_history = defaultdict(list)
 
-# Variable para controlar el modo (True = Detección, False = Seguimiento)
-modo_deteccion = False
-
-# Función para procesar detecciones en modo de seguimiento (trayectoria persistente)
+# Función para procesar seguimientos (trayectoria persistente)
 def draw_annotations_tracking(frame, results):
     active_ids = set()
 
@@ -69,60 +73,41 @@ def draw_annotations_tracking(frame, results):
             )
     return frame
 
-# Función para realizar detección
-def draw_annotations_detection(frame, results):
-    for result in results[0].boxes:
-        x1, y1, x2, y2 = map(int, result.xyxy[0])  # Coordenadas de la caja delimitadora
-        conf = result.conf[0].item()  # Confianza de la detección
-        class_id = int(result.cls[0].item())  # Clase detectada
-
-        # Filtrar solo detecciones de balón y ajustar el umbral de confianza
-        if class_id == 0 and conf > 0.5:
-            cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 2)
-            cv2.putText(frame, f"Conf {conf:.2f}", (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
-    return frame
-
 # Bucle principal
 while True:
     start_time = time.time()
 
     success, frame = cap.read()
     if not success:
-        print("No se pudo leer el fotograma.")
+        print("Fin del video o error al leer el fotograma.")
         break
-    
+
     frame = cv2.flip(frame, 1)  # Modo espejo
-    frame = cv2.resize(frame, (FRAME_WIDTH,FRAME_HEIGHT))
-    # Realizar detección si el modo está activado
-    # Alternar entre detección y seguimiento solo cuando sea necesario
-    if modo_deteccion:
-        results = model.predict(frame, imgsz=FRAME_WIDTH)  # Usar tamaño de imagen adecuado
-        annotated_frame = draw_annotations_detection(frame.copy(), results)
-    else:
-        # Modificar el código de seguimiento para hacerlo más eficiente
-        results = model.track(frame, imgsz=FRAME_WIDTH, persist=False, device="cuda", conf=CONF_THRESHOLD, iou=IOU_THRESHOLD)
-        annotated_frame = draw_annotations_tracking(frame.copy(), results)
+    frame = cv2.resize(frame, (FRAME_WIDTH, FRAME_HEIGHT))
+
+    # Realizar seguimiento
+    results = model.track(frame, imgsz=FRAME_WIDTH, persist=False, device="cuda", conf=CONF_THRESHOLD, iou=IOU_THRESHOLD)
+    annotated_frame = draw_annotations_tracking(frame.copy(), results)
 
     # Calcular y mostrar el tiempo por iteración
     elapsed_time = time.time() - start_time
     fps = 1 / elapsed_time
     cv2.putText(annotated_frame, f"FPS: {fps:.2f}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
-    # Mostrar el fotograma anotado
-    cv2.imshow("YOLO - Detección/Seguimiento", annotated_frame)
+    # Escribir el fotograma procesado en el archivo de salida
+    out.write(annotated_frame)
 
-    # Controlar la alternancia de modo con la tecla 'a'
-    key = cv2.waitKey(1) & 0xFF
-    if key == ord('a'):
-        modo_deteccion = not modo_deteccion  # Alternar entre detección y seguimiento
-        estado = "detección" if modo_deteccion else "seguimiento"
-        print(f"Modo cambiado a {estado}.")
+# Agregar un fotograma con el mensaje final
+final_frame = np.zeros((FRAME_HEIGHT, FRAME_WIDTH, 3), dtype=np.uint8)
+cv2.putText(final_frame, "Modelo aplicado al video", (FRAME_WIDTH // 6, FRAME_HEIGHT // 2),
+            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
 
-    # Salir si se presiona 'q'
-    if key == ord('q'):
-        print("Saliendo...")
-        break
+# Escribir el fotograma final con el mensaje
+out.write(final_frame)
 
 # Liberar recursos
 cap.release()
+out.release()
 cv2.destroyAllWindows()
+
+print("Modelo aplicado al video y proceso terminado.")

@@ -6,8 +6,8 @@ model = YOLO("YOLO/runs/detect/yolo11l/weights/best.pt")
 
 def mostrar_stream(indice_camara=0, nombre_ventana="Camara"):
     # Configuración de la resolución
-    resolucion_ancho = 1920  # Ancho de la imagen
-    resolucion_alto = 1080    # Alto de la imagen
+    resolucion_ancho = 640  # Ancho de la imagen
+    resolucion_alto = 480    # Alto de la imagen
 
     # Crear una instancia de VideoCapture con el índice de la cámara
     cap = cv2.VideoCapture(indice_camara)
