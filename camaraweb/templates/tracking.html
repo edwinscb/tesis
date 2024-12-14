@@ -48,13 +48,34 @@
     
     <!-- Contenido principal -->
     <div class="container py-5">
-        <h1 class="text-center text-primary mb-4">Sube tu video para procesamiento</h1>
-        <form action="/upload" method="post" enctype="multipart/form-data" class="text-center">
-            <div class="mb-3">
-                <input type="file" name="video" id="videoFile" accept="video/mp4, video/*" class="form-control" required>
-            </div>
-            <button type="submit" id="submitButton" class="btn btn-success">Procesar Video</button>
-        </form>
+        <!-- Formulario para subir video y establecer el CONF_THRESHOLD -->
+<h1 class="text-center text-primary mb-4">Sube tu video para procesamiento</h1>
+
+<!-- Formulario con entrada para CONF_THRESHOLD -->
+<form action="/upload" method="post" enctype="multipart/form-data" class="text-center">
+    <div class="mb-3">
+        <label for="confidence" class="confidence-label">Valor de Confianza:</label>
+        <input type="text" id="confidence" value="0.75"step="0.01" min="0" max="1" class="input-confidence" data-confidence="high" placeholder="Confianza">
+    </div>
+
+    <div class="mb-3">
+        <input type="file" name="video" id="videoFile" accept="video/mp4, video/*" class="form-control" required>
+    </div>
+
+    <button type="submit" id="submitButton" class="btn btn-success">Procesar Video</button>
+</form>
+
+        <!-- Sección de Sugerencias -->
+        <div class="my-5">
+            <h2 class="text-center text-primary mb-4">Sugerencias para mejorar la calidad del video</h2>
+            <ul class="list-group">
+                <li class="list-group-item">🎯 <strong>Buen enfoque del balón:</strong> Asegúrate de que el balón esté claramente visible y enfocado durante todo el video.</li>
+                <li class="list-group-item">💡 <strong>Buena iluminación:</strong> Graba en un ambiente bien iluminado para evitar sombras o áreas oscuras que dificulten el análisis.</li>
+                <li class="list-group-item">⏱️ <strong>Videos cortos:</strong> Intenta grabar videos más cortos para mejorar el rendimiento del procesamiento.</li>
+                <li class="list-group-item">🖥️  <strong>dimensiones:</strong>Tamaño del video preferentemente 640x480</li>
+                <li class="list-group-item">⚙️ <strong>Editar precisión:</strong> Si el resultado no es el esperado, ajusta el video o repítelo para obtener un mejor análisis.</li>
+            </ul>
+        </div>
 
         <h2 class="text-center text-primary mt-5">Ejemplos de Videos</h2>
         <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -88,6 +109,28 @@
                     </video>
                     <div class="card-body">
                         <h5 class="card-title text-center">Ejemplo 3</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <video class="card-img-top" controls>
+                        <source src="/static/videos/ejemplo4.mp4" type="video/mp4">
+                        Tu navegador no soporta el formato de video.
+                    </video>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Ejemplo 4</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <video class="card-img-top" controls>
+                        <source src="/static/videos/ejemplo5.mp4" type="video/mp4">
+                        Tu navegador no soporta el formato de video.
+                    </video>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Ejemplo 5</h5>
                     </div>
                 </div>
             </div>

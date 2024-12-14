@@ -1,8 +1,8 @@
-from flask import Flask, request, send_from_directory, render_template
+import os
 import cv2
 import numpy as np
+from flask import Flask, request, send_from_directory, render_template
 from ultralytics import YOLO
-import os
 from collections import defaultdict
 
 app = Flask(__name__)
@@ -19,11 +19,21 @@ model = YOLO("camaraweb/best.pt")
 # Configuración de parámetros
 FRAME_WIDTH = 640
 FRAME_HEIGHT = 480
-CONF_THRESHOLD = 0.8
+CONF_THRESHOLD = 0.7
 IOU_THRESHOLD = 0.2
-TRACK_HISTORY_LENGTH = 50
+TRACK_HISTORY_LENGTH = 15
 
 track_history = defaultdict(list)
+
+# Función para mantener el límite de 3 archivos en una carpeta
+def manage_folder_files(folder):
+    files = sorted(os.listdir(folder), key=lambda f: os.path.getctime(os.path.join(folder, f)))
+    if len(files) > 3:
+        # Eliminar el archivo más antiguo
+        oldest_file = files[0]
+        oldest_file_path = os.path.join(folder, oldest_file)
+        os.remove(oldest_file_path)
+        print(f"Archivo eliminado: {oldest_file}")
 
 @app.route('/')
 def index():
@@ -47,6 +57,9 @@ def contactanos():
 
 @app.route('/upload', methods=['POST'])
 def upload_video():
+    global CONF_THRESHOLD
+    conf_threshold = request.form.get('confThreshold', type=float, default=0.75)
+
     # Verifica si se ha enviado el archivo
     if 'video' not in request.files:
         return "No se proporcionó un archivo", 400
@@ -59,27 +72,27 @@ def upload_video():
     processed_filename = f"processed_{video_file.filename}"
     processed_path = os.path.join(PROCESSED_FOLDER, processed_filename)
 
-    # Asegúrate de que las carpetas existan
+    # Asegurarse de que las carpetas existan
     os.makedirs(PROCESSED_FOLDER, exist_ok=True)
 
     # Guardar el archivo de video
-    print(f"Guardando el archivo en: {video_path}")
     video_file.save(video_path)
     print(f"Archivo guardado correctamente, procesando...")
 
-    # Aplicar seguimiento al video
+    # Limitar a 3 archivos en la carpeta de uploads
+    manage_folder_files(UPLOAD_FOLDER)
+    
+    # Aplicar seguimiento al video con el nuevo valor de CONF_THRESHOLD
     apply_tracking(video_path, processed_path)
+    
+    # Limitar a 3 archivos en la carpeta de processed
+    manage_folder_files(PROCESSED_FOLDER)
     
     # Verificar si el archivo procesado existe
     if not os.path.exists(processed_path):
-        print(f"El archivo no existe: {processed_path}")
         return "Error: el archivo no se pudo encontrar", 404
 
-    print(f"Enviando el archivo procesado desde: {PROCESSED_FOLDER}")
-    filename = os.path.basename(processed_path)
-    print(f"Enviando el archivo procesado: {filename}")
-    # Enviar el archivo procesado
-    return send_from_directory(os.path.join(os.getcwd(), 'camaraweb', 'static', 'processed'), filename, as_attachment=True)
+    return send_from_directory(os.path.join(os.getcwd(), 'camaraweb', 'static', 'processed'), os.path.basename(processed_path), as_attachment=True)
 
 def apply_tracking(video_path, output_path):
     cap = cv2.VideoCapture(video_path)
@@ -123,7 +136,6 @@ def draw_annotations_tracking(frame, results):
         points = np.array(track, np.int32).reshape((-1, 1, 2))
         cv2.polylines(frame, [points], isClosed=False, color=(0, 255, 0), thickness=2)
 
-        # Dibujar la caja delimitadora y el ID
         if track_id in active_ids:
             x, y = track[-1]
             x1, y1 = int(x - w / 2), int(y - h / 2)

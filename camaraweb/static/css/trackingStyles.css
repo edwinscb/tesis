@@ -146,3 +146,55 @@ footer p {
         font-size: 0.9rem;
     }
 }
+/* ===========================
+   Estilo para el input de confianza
+   =========================== */
+   .input-confidence {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    font-size: 1.1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    margin: 10px 0;
+}
+
+.input-confidence:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.2); /* Sombra de enfoque */
+    outline: none;
+}
+
+.input-confidence::placeholder {
+    color: #888;
+    font-style: italic;
+}
+
+.input-confidence[data-confidence="low"] {
+    background-color: #ffebee; /* Fondo rojo claro para baja confianza */
+    border-color: #f44336; /* Borde rojo para baja confianza */
+}
+
+.input-confidence[data-confidence="medium"] {
+    background-color: #fff8e1; /* Fondo amarillo claro para confianza media */
+    border-color: #ffeb3b; /* Borde amarillo para confianza media */
+}
+
+.input-confidence[data-confidence="high"] {
+    background-color: #e8f5e9; /* Fondo verde claro para alta confianza */
+    border-color: #4caf50; /* Borde verde para alta confianza */
+}
+
+/* ===========================
+   Etiqueta de confianza
+   =========================== */
+.confidence-label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
