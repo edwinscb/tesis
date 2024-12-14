@@ -30,7 +30,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/tracking')
-def models():
+def tracking():
     return render_template('tracking.html')
 
 @app.route('/aprendizaje')

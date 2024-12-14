@@ -1,0 +1,148 @@
+/* ===========================
+   Variables de color
+   =========================== */
+   :root {
+    --primary-color: #4CAF50; /* Color principal (verde) */
+    --secondary-color: #f8f9fa; /* Fondo de página */
+    --highlight-color: #007bff; /* Color de resaltado (azul) */
+    --font-family: 'Arial', sans-serif; /* Fuente predeterminada */
+    --card-bg-color: #ffffff; /* Fondo de tarjetas */
+    --card-border-color: #ddd; /* Borde de tarjetas */
+    --footer-bg-color: #343a40; /* Fondo del pie de página */
+    --footer-text-color: #ffffff; /* Color del texto del pie de página */
+    --btn-hover-color: #388e3c; /* Color de botón al pasar */
+}
+
+/* ===========================
+   Estilo general
+   =========================== */
+body {
+    font-family: var(--font-family);
+    background-color: var(--secondary-color);
+    margin: 0;
+    padding: 0;
+    color: #333; /* Mayor contraste en el texto */
+}
+
+/* ===========================
+   Títulos y texto
+   =========================== */
+h1, h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+p {
+    line-height: 1.6;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+/* ===========================
+   Contenedor general
+   =========================== */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* ===========================
+   Diseño de tarjetas
+   =========================== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #f9f9f9;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.card p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+/* ===========================
+   Botones
+   =========================== */
+.btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: var(--btn-hover-color);
+    transform: scale(1.05);
+}
+
+/* ===========================
+   Pie de página
+   =========================== */
+footer {
+    background-color: var(--footer-bg-color);
+    color: var(--footer-text-color);
+    text-align: center;
+    padding: 20px;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* ===========================
+   Estilos responsivos
+   =========================== */
+@media (max-width: 768px) {
+    h1, h2 {
+        font-size: 2rem;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}
