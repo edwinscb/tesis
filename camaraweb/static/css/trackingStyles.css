@@ -1,200 +1,273 @@
-/* ===========================
-   Variables de color
-   =========================== */
-   :root {
-    --primary-color: #4CAF50; /* Color principal (verde) */
-    --secondary-color: #f8f9fa; /* Fondo de página */
-    --highlight-color: #007bff; /* Color de resaltado (azul) */
-    --font-family: 'Arial', sans-serif; /* Fuente predeterminada */
-    --card-bg-color: #ffffff; /* Fondo de tarjetas */
-    --card-border-color: #ddd; /* Borde de tarjetas */
-    --footer-bg-color: #343a40; /* Fondo del pie de página */
-    --footer-text-color: #ffffff; /* Color del texto del pie de página */
-    --btn-hover-color: #388e3c; /* Color de botón al pasar */
-}
-
-/* ===========================
-   Estilo general
-   =========================== */
-body {
-    font-family: var(--font-family);
-    background-color: var(--secondary-color);
-    margin: 0;
-    padding: 0;
-    color: #333; /* Mayor contraste en el texto */
-}
-
-/* ===========================
-   Títulos y texto
-   =========================== */
-h1, h2 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
-h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-p {
-    line-height: 1.6;
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-}
-
-/* ===========================
-   Contenedor general
-   =========================== */
-.container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-    text-align: center;
-}
-
-/* ===========================
-   Diseño de tarjetas
-   =========================== */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.card {
-    background-color: var(--card-bg-color);
-    border: 1px solid var(--card-border-color);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
-    text-align: center;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    background-color: #f9f9f9;
-}
-
-.card-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: var(--primary-color);
-}
-
-.card p {
-    font-size: 1rem;
-    margin-bottom: 20px;
-}
-
-/* ===========================
-   Botones
-   =========================== */
-.btn {
-    display: inline-block;
-    background-color: var(--primary-color);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn:hover {
-    background-color: var(--btn-hover-color);
-    transform: scale(1.05);
-}
-
-/* ===========================
-   Pie de página
-   =========================== */
-footer {
-    background-color: var(--footer-bg-color);
-    color: var(--footer-text-color);
-    text-align: center;
-    padding: 20px;
-}
-
-footer p {
-    margin: 0;
-    font-size: 0.9rem;
-}
-
-/* ===========================
-   Estilos responsivos
-   =========================== */
-@media (max-width: 768px) {
-    h1, h2 {
-        font-size: 2rem;
+    /* ===========================
+    Variables de color
+    =========================== */
+    :root {
+        --primary-color: #4CAF50; /* Color principal (verde) */
+        --secondary-color: #f8f9fa; /* Fondo de página */
+        --highlight-color: #007bff; /* Color de resaltado (azul) */
+        --font-family: 'Arial', sans-serif; /* Fuente predeterminada */
+        --card-bg-color: #ffffff; /* Fondo de tarjetas */
+        --card-border-color: #ddd; /* Borde de tarjetas */
+        --footer-bg-color: #343a40; /* Fondo del pie de página */
+        --footer-text-color: #ffffff; /* Color del texto del pie de página */
+        --btn-hover-color: #388e3c; /* Color de botón al pasar */
     }
 
-    .card-title {
-        font-size: 1.25rem;
+    /* ===========================
+    Estilo general
+    =========================== */
+    body {
+        font-family: var(--font-family);
+        background-color: var(--secondary-color);
+        margin: 0;
+        padding: 0;
+        color: #333; /* Mayor contraste en el texto */
+    }
+
+    /* ===========================
+    Títulos y texto
+    =========================== */
+    h1, h2 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
     }
 
     p {
-        font-size: 1rem;
+        line-height: 1.6;
+        font-size: 1.1rem;
+        margin-bottom: 30px;
     }
 
+    /* ===========================
+    Contenedor general
+    =========================== */
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+        text-align: center;
+    }
+
+    /* ===========================
+    Diseño de tarjetas
+    =========================== */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+
+    .card {
+        background-color: var(--card-bg-color);
+        border: 1px solid var(--card-border-color);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+        text-align: center;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        background-color: #f9f9f9;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: var(--primary-color);
+    }
+
+    .card p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+
+    /* ===========================
+    Botones
+    =========================== */
     .btn {
-        padding: 8px 15px;
+        display: inline-block;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+        background-color: var(--btn-hover-color);
+        transform: scale(1.05);
+    }
+
+    /* ===========================
+    Pie de página
+    =========================== */
+    footer {
+        background-color: var(--footer-bg-color);
+        color: var(--footer-text-color);
+        text-align: center;
+        padding: 20px;
+    }
+
+    footer p {
+        margin: 0;
         font-size: 0.9rem;
     }
-}
-/* ===========================
-   Estilo para el input de confianza
-   =========================== */
-   .input-confidence {
-    width: 100%;
-    max-width: 400px;
-    padding: 10px;
-    font-size: 1.1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    color: #333;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    margin: 10px 0;
+
+    /* ===========================
+    Estilos responsivos
+    =========================== */
+    @media (max-width: 768px) {
+        h1, h2 {
+            font-size: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+    }
+    /* ===========================
+    Estilo para el input de confianza
+    =========================== */
+    .input-confidence {
+        width: 100%;
+        max-width: 400px;
+        padding: 10px;
+        font-size: 1.1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        color: #333;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        margin: 10px 0;
+    }
+
+    .input-confidence:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 8px rgba(76, 175, 80, 0.2); /* Sombra de enfoque */
+        outline: none;
+    }
+
+    .input-confidence::placeholder {
+        color: #888;
+        font-style: italic;
+    }
+
+    .input-confidence[data-confidence="low"] {
+        background-color: #ffebee; /* Fondo rojo claro para baja confianza */
+        border-color: #f44336; /* Borde rojo para baja confianza */
+    }
+
+    .input-confidence[data-confidence="medium"] {
+        background-color: #fff8e1; /* Fondo amarillo claro para confianza media */
+        border-color: #ffeb3b; /* Borde amarillo para confianza media */
+    }
+
+    .input-confidence[data-confidence="high"] {
+        background-color: #e8f5e9; /* Fondo verde claro para alta confianza */
+        border-color: #4caf50; /* Borde verde para alta confianza */
+    }
+
+    /* ===========================
+    Etiqueta de confianza
+    =========================== */
+    .confidence-label {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+        display: block;
+    }
+/* Estilo general de la sección de instrucciones */
+.instructions-container {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.input-confidence:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.2); /* Sombra de enfoque */
-    outline: none;
-}
-
-.input-confidence::placeholder {
-    color: #888;
-    font-style: italic;
-}
-
-.input-confidence[data-confidence="low"] {
-    background-color: #ffebee; /* Fondo rojo claro para baja confianza */
-    border-color: #f44336; /* Borde rojo para baja confianza */
-}
-
-.input-confidence[data-confidence="medium"] {
-    background-color: #fff8e1; /* Fondo amarillo claro para confianza media */
-    border-color: #ffeb3b; /* Borde amarillo para confianza media */
-}
-
-.input-confidence[data-confidence="high"] {
-    background-color: #e8f5e9; /* Fondo verde claro para alta confianza */
-    border-color: #4caf50; /* Borde verde para alta confianza */
-}
-
-/* ===========================
-   Etiqueta de confianza
-   =========================== */
-.confidence-label {
-    font-size: 1rem;
+/* Título de las instrucciones */
+.instructions-container .lead {
     font-weight: bold;
+    color: #007bff;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-family: 'Helvetica', sans-serif;
+}
+
+/* Iconos de los pasos */
+.step-icon {
+    color: #28a745;
+    margin-right: 10px;
+}
+
+/* Estilo de los números y las descripciones de los pasos */
+.instructions-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.instructions-container ul li {
+    font-size: 1.1rem;
+    margin: 10px 0;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.instructions-container ul li strong {
+    font-weight: bold;
+}
+
+/* Estilo de las palabras en cursiva */
+.instructions-container .italic {
+    font-style: italic;
     color: #333;
-    margin-bottom: 5px;
-    display: block;
+}
+
+/* Estilo de la sección de texto adicional */
+.instructions-container .text-muted {
+    color: #6c757d;
+    font-size: 1rem;
+}
+
+/* Mensaje de espera */
+.wait-message {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+}
+
+.wait-message i {
+    color: #ffc107;
+    margin-right: 10px;
+}
+
+.wait-message strong {
+    color: #856404;
 }

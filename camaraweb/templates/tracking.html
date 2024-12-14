@@ -1,148 +1,168 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartVolley</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/trackingStyles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbarStyles.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-        <div class="container-fluid">
-            <!-- Logo de la aplicación -->
-            <a class="navbar-brand" href="/">
-                <img src="static/images/smartVolley64x64.png" alt="SmartVolley">
-            </a>
-            <a class="navbar-brand fs-1 link-success fw-bold" aria-current="page" href="/">SmartVolley</a>
-            
-            <!-- Botón para pantallas pequeñas -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SmartVolley</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/trackingStyles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/navbarStyles.css') }}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <!-- Barra de navegación -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+            <div class="container-fluid">
+                <!-- Logo de la aplicación -->
+                <a class="navbar-brand" href="/">
+                    <img src="static/images/smartVolley64x64.png" alt="SmartVolley">
+                </a>
+                <a class="navbar-brand fs-1 link-success fw-bold" aria-current="page" href="/">SmartVolley</a>
+                
+                <!-- Botón para pantallas pequeñas -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <!-- Elementos del menú de navegación -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Inicio</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Servicios
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item active" href="tracking">Seguimiento de balón</a></li>
-                            <li><a class="dropdown-item" href="aprendizaje">Videos de aprendizaje</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="true" href="contactanos">Contáctanos</a>
-                    </li>
+                <!-- Elementos del menú de navegación -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Inicio</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Servicios
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item active" href="tracking">Seguimiento de balón</a></li>
+                                <li><a class="dropdown-item" href="aprendizaje">Videos de aprendizaje</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="true" href="contactanos">Contáctanos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Contenido principal -->
+        <div class="container py-5">
+            <!-- Formulario para subir video y establecer el CONF_THRESHOLD -->
+            <h1 class="text-center text-primary mb-4">Sube tu video para procesamiento</h1>
+
+            <!-- Instrucciones para el usuario -->
+<div class="instructions-container">
+    <p class="lead">
+        <i class="bi bi-info-circle-fill"></i> Sigue estos pasos para que el sistema pueda detectar el balón en tu video:
+    </p>
+    <ul class="list-unstyled">
+        <li><i class="bi bi-check-circle-fill step-icon"></i> <strong>1. Selecciona el archivo de video</strong> desde tu dispositivo haciendo clic en <span class="italic">"Seleccionar archivo"</span>.</li>
+        <li><i class="bi bi-check-circle-fill step-icon"></i> <strong>2. Ajusta el "Valor de Confianza"</strong>. Este valor le dice al sistema cuán seguro debe estar para detectar el balón. 
+            Si pones un número más alto (como <strong>0.9</strong>), el sistema será más estricto y solo detectará el balón si está muy claro. Si pones un número más bajo (como <strong>0.5</strong>), el sistema será más flexible y podrá detectar más balones, pero también podría cometer más errores. El valor por defecto es <strong>0.75</strong>, que normalmente funciona bien.
+        </li>
+        <li><i class="bi bi-check-circle-fill step-icon"></i> <strong>3. Haz clic en "Procesar Video"</strong> para comenzar el análisis del video.</li>
+    </ul>
+    <p class="text-muted">
+        El sistema analizará tu video y mostrará el resultado de la detección del balón.
+    </p>
+    <div >
+        <p><i class="bi bi-clock-fill"></i> <strong>Por favor, ten paciencia</strong>. El análisis puede tomar algunos minutos, pero los resultados valdrán la pena. ¡No te vayas, estamos trabajando en ello!</p>
+    </div>
+</div>
+
+    <!-- Formulario con entrada para CONF_THRESHOLD -->
+    <form action="/upload" method="post" enctype="multipart/form-data" class="text-center">
+        <div class="mb-3">
+            <label for="confidence" class="confidence-label">Valor de Confianza:</label>
+            <input type="text" id="confidence" value="0.75"step="0.01" min="0" max="1" class="input-confidence" data-confidence="high" placeholder="Confianza">
+        </div>
+
+        <div class="mb-3">
+            <input type="file" name="video" id="videoFile" accept="video/mp4, video/*" class="form-control" required>
+        </div>
+
+        <button type="submit" id="submitButton" class="btn btn-success">Procesar Video</button>
+    </form>
+
+            <!-- Sección de Sugerencias -->
+            <div class="my-5">
+                <h2 class="text-center text-primary mb-4">Sugerencias para mejorar la calidad del video</h2>
+                <ul class="list-group">
+                    <li class="list-group-item">🎯 <strong>Buen enfoque del balón:</strong> Asegúrate de que el balón esté claramente visible y enfocado durante todo el video.</li>
+                    <li class="list-group-item">💡 <strong>Buena iluminación:</strong> Graba en un ambiente bien iluminado para evitar sombras o áreas oscuras que dificulten el análisis.</li>
+                    <li class="list-group-item">⏱️ <strong>Videos cortos:</strong> Intenta grabar videos más cortos para mejorar el rendimiento del procesamiento.</li>
+                    <li class="list-group-item">🖥️  <strong>Dimensiones:</strong> Tamaño del video recomendado 640 x 480 pixeles.</li>
+                    <li class="list-group-item">⚙️ <strong>Editar precisión:</strong> Si el resultado no es el esperado, ajusta el video o repítelo para obtener un mejor análisis.</li>
                 </ul>
             </div>
-        </div>
-    </nav>
-    
-    <!-- Contenido principal -->
-    <div class="container py-5">
-        <!-- Formulario para subir video y establecer el CONF_THRESHOLD -->
-<h1 class="text-center text-primary mb-4">Sube tu video para procesamiento</h1>
 
-<!-- Formulario con entrada para CONF_THRESHOLD -->
-<form action="/upload" method="post" enctype="multipart/form-data" class="text-center">
-    <div class="mb-3">
-        <label for="confidence" class="confidence-label">Valor de Confianza:</label>
-        <input type="text" id="confidence" value="0.75"step="0.01" min="0" max="1" class="input-confidence" data-confidence="high" placeholder="Confianza">
-    </div>
-
-    <div class="mb-3">
-        <input type="file" name="video" id="videoFile" accept="video/mp4, video/*" class="form-control" required>
-    </div>
-
-    <button type="submit" id="submitButton" class="btn btn-success">Procesar Video</button>
-</form>
-
-        <!-- Sección de Sugerencias -->
-        <div class="my-5">
-            <h2 class="text-center text-primary mb-4">Sugerencias para mejorar la calidad del video</h2>
-            <ul class="list-group">
-                <li class="list-group-item">🎯 <strong>Buen enfoque del balón:</strong> Asegúrate de que el balón esté claramente visible y enfocado durante todo el video.</li>
-                <li class="list-group-item">💡 <strong>Buena iluminación:</strong> Graba en un ambiente bien iluminado para evitar sombras o áreas oscuras que dificulten el análisis.</li>
-                <li class="list-group-item">⏱️ <strong>Videos cortos:</strong> Intenta grabar videos más cortos para mejorar el rendimiento del procesamiento.</li>
-                <li class="list-group-item">🖥️  <strong>dimensiones:</strong>Tamaño del video preferentemente 640x480</li>
-                <li class="list-group-item">⚙️ <strong>Editar precisión:</strong> Si el resultado no es el esperado, ajusta el video o repítelo para obtener un mejor análisis.</li>
-            </ul>
-        </div>
-
-        <h2 class="text-center text-primary mt-5">Ejemplos de Videos</h2>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <div class="card h-100">
-                    <video class="card-img-top" controls>
-                        <source src="/static/videos/ejemplo1.mp4" >
-                        Tu navegador no soporta el formato de video.
-                    </video>
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Ejemplo 1</h5>
+            <h2 class="text-center text-primary mt-5">Ejemplos de Videos</h2>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="card h-100">
+                        <video class="card-img-top" controls>
+                            <source src="/static/videos/ejemplo1.mp4" >
+                            Tu navegador no soporta el formato de video.
+                        </video>
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Ejemplo 1</h5>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <video class="card-img-top" controls>
-                        <source src="/static/videos/ejemplo2.mp4" type="video/mp4">
-                        Tu navegador no soporta el formato de video.
-                    </video>
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Ejemplo 2</h5>
+                <div class="col">
+                    <div class="card h-100">
+                        <video class="card-img-top" controls>
+                            <source src="/static/videos/ejemplo2.mp4" type="video/mp4">
+                            Tu navegador no soporta el formato de video.
+                        </video>
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Ejemplo 2</h5>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <video class="card-img-top" controls>
-                        <source src="/static/videos/ejemplo3.mp4" type="video/mp4">
-                        Tu navegador no soporta el formato de video.
-                    </video>
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Ejemplo 3</h5>
+                <div class="col">
+                    <div class="card h-100">
+                        <video class="card-img-top" controls>
+                            <source src="/static/videos/ejemplo3.mp4" type="video/mp4">
+                            Tu navegador no soporta el formato de video.
+                        </video>
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Ejemplo 3</h5>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <video class="card-img-top" controls>
-                        <source src="/static/videos/ejemplo4.mp4" type="video/mp4">
-                        Tu navegador no soporta el formato de video.
-                    </video>
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Ejemplo 4</h5>
+                <div class="col">
+                    <div class="card h-100">
+                        <video class="card-img-top" controls>
+                            <source src="/static/videos/ejemplo4.mp4" type="video/mp4">
+                            Tu navegador no soporta el formato de video.
+                        </video>
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Ejemplo 4</h5>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <video class="card-img-top" controls>
-                        <source src="/static/videos/ejemplo5.mp4" type="video/mp4">
-                        Tu navegador no soporta el formato de video.
-                    </video>
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Ejemplo 5</h5>
+                <div class="col">
+                    <div class="card h-100">
+                        <video class="card-img-top" controls>
+                            <source src="/static/videos/ejemplo5.mp4" type="video/mp4">
+                            Tu navegador no soporta el formato de video.
+                        </video>
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Ejemplo 5</h5>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Pie de página -->
-    <footer class="bg-dark text-white text-center py-4">
-        <p class="mb-0">© 2024 SmartVolley. Todos los derechos reservados.</p>
-        <p>Desarrollado por el equipo SmartVolley.</p>
-    </footer>
+        <!-- Pie de página -->
+        <footer class="bg-dark text-white text-center py-4">
+            <p class="mb-0">© 2024 SmartVolley. Todos los derechos reservados.</p>
+            <p>Desarrollado por el equipo SmartVolley.</p>
+        </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+    </html>
