@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 # Configuraciones
 UPLOAD_FOLDER = 'camaraweb\\static\\uploads'
-PROCESSED_FOLDER = 'camaraweb\\static\\processed'
+PROCESSED_FOLDER = os.path.join('camaraweb', 'static', 'processed')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(PROCESSED_FOLDER, exist_ok=True)
 
@@ -55,7 +55,7 @@ def demo():
 def contactanos():
     return render_template('contactanos.html')
 
-@app.route('/upload', methods=['POST'])
+@app.route('/upload', methods=['GET', 'POST'])
 def upload_video():
     global CONF_THRESHOLD
     conf_threshold = request.form.get('confThreshold', type=float, default=0.75)
@@ -92,7 +92,12 @@ def upload_video():
     if not os.path.exists(processed_path):
         return "Error: el archivo no se pudo encontrar", 404
 
-    return send_from_directory(os.path.join(os.getcwd(), 'camaraweb', 'static', 'processed'), os.path.basename(processed_path), as_attachment=True)
+    print("Ruta solicitada:", os.path.join(os.getcwd(), 'camaraweb', 'static', 'processed'))
+    print("Archivos en processed:", os.listdir(PROCESSED_FOLDER))
+    print(PROCESSED_FOLDER)
+    print(processed_path)
+
+    return send_from_directory(PROCESSED_FOLDER, os.path.basename(processed_path), as_attachment=True)
 
 def apply_tracking(video_path, output_path):
     cap = cv2.VideoCapture(video_path)
@@ -147,4 +152,4 @@ def draw_annotations_tracking(frame, results):
     return frame
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
