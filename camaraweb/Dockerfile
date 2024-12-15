@@ -29,7 +29,7 @@ RUN pip install -r requirements.txt
 
 
 # Exponer el puerto 5000 (puerto predeterminado de Flask)
-EXPOSE 5000
+EXPOSE 8080
 
 # Comando para ejecutar la aplicación Flask
 CMD ["python3", "app.py"]
